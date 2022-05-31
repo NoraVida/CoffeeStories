@@ -1,0 +1,46 @@
+section {
+  padding-top: 2rem;
+  height: 35rem;
+}
+
+.link {
+  text-decoration: none;
+  color: #292929;
+}
+
+.find-your-coffee {
+  background-image: url('../assets/img/main-background.jpg');
+  background-size: cover;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.find-your-coffee button {
+  width: 20vw;
+  
+}
+
+.services {
+  background-color: #ecd59f;
+  padding-left: 5vw;
+}
+
+.service-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cup-coffee {
+  // width: 15vw;
+  height: 42vh;
+  padding-left: 5vw;
+}
+
+.register-container {
+  display: flex;
+  padding-left: 5vw;
+}
