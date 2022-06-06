@@ -1,20 +1,20 @@
 import Joi from 'joi';
 
-export const registerValidation = ({ name, email, password }) => {
+export const validateRegister = ({ name, email, password }) => {
   const schema = Joi.object({
     name: Joi.string()
       .required()
-      .messages({ 'string.empty': 'Name is required.' }),
+      .messages({ 'string.empty': 'Felhasználónév megadása kötelező' }),
     email: Joi.string()
       .required()
       .email()
-      .messages({ 'string.empty': 'Email is required.' }),
+      .messages({ 'string.empty': 'Email megadása kötelező' }),
     password: Joi.string()
       .min(8)
       .required()
       .messages({
-        'string.empty': 'Password is required.',
-        'string.min': 'Password must be at least 8 characters.',
+        'string.empty': 'Jelszó megadása kötelező',
+        'string.min': 'A jelszónak legalább 8 karakter hósszúnak kell lennie',
       }),
   });
 

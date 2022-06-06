@@ -4,7 +4,7 @@ import {
   registerController,
   loginController,
   coffeeController,
-  ratingController,
+  oneCoffeeController,
 } from '../controllers';
 
 const router = express.Router();
@@ -15,6 +15,6 @@ router.use(express.json());
 router.post('/register', registerController.post);
 router.post('/login', loginController.post);
 router.get('/coffees', coffeeController.get);
-router.get('/coffees/:productId', ratingController.get);
+router.get('/coffees/:productId', oneCoffeeController.get);
 
 export default router;

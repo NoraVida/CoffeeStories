@@ -1,7 +1,7 @@
 import Coffee from '../models/Coffee';
 import ApiError from '../error/ApiError';
 
-export const ratingService = {
+export const oneCoffeeService = {
   async getOneCoffee(productId) {
     try {
       const coffee = await Coffee.findOne({ _id: productId });
