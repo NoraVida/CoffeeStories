@@ -3,8 +3,9 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #C6A477;
-  padding: 10px;
+  background-color: #3b2621;
+  // background-color: #C6A477;
+  padding-left: 30px;
   height: 10vh;
   // min-height: 8vh;
 }
@@ -12,11 +13,16 @@ nav {
 .logo {
   text-decoration: none;
   font-size: 5vh;
+  color: antiquewhite;
 }
 
 .nav-links {
+  margin: auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   
 }
 
@@ -26,6 +32,7 @@ nav {
 
 .nav-links .nav-link {
   text-decoration: none;
+  color: antiquewhite;
 }
 
 // @media screen and (min-width: 1200px) {

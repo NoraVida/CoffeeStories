@@ -24,31 +24,37 @@ function Coffees({
 
   return (
     <>
-      {data.coffees?.map((product) => (
-        <Coffee
-          key={product._id}
-          productId={product._id}
-          productName={product.name}
-          productRating={product.rating}
-          ratingNumber={product.ratingNumber}
-          productDescription={product.description}
-        />
-      ))}
+      <div className="coffee-container">
+        {data.coffees !== undefined ? data.coffees?.map((product) => (
+          <Coffee
+            key={product._id}
+            productId={product._id}
+            productName={product.name}
+            productRating={product.rating}
+            ratingNumber={product.ratingNumber}
+            productDescription={product.description}
+          />
+        )) : (
+          <div className="alert alert-warning" role="alert">
+            Sajnos a kávék jelenleg nem elérhetők
+          </div>
+        )}
+      </div>
       {loggedInUser?.userId ? (
-        <section className="section-bottom">
-          <div>Szeretnél új kávét hozzáadni a listához? Regisztráció után megteheted</div>
-          <button className="btn btn-primary mt-5" type="button">
-            <Link className="link" to="/register">
-              Irány a regisztráció
-            </Link>
-          </button>
-        </section>
-      ) : (
         <section>
           <div>Nem találod a keresett kávét? Egészítsd ki a listát</div>
           <button className="btn btn-primary mt-5" type="button">
             <Link className="link" to="/register">
               Új kávé hozzáadása
+            </Link>
+          </button>
+        </section>
+      ) : (
+        <section className="section-bottom">
+          <div>Szeretnél új kávét hozzáadni a listához? Regisztráció után megteheted</div>
+          <button className="btn btn-primary mt-5" type="button">
+            <Link className="link" to="/register">
+              Irány a regisztráció
             </Link>
           </button>
         </section>

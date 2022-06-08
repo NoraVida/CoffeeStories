@@ -1,8 +1,8 @@
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
-// export const getDataFromToken = (token) => {
-//   return jwt.decode(token);
-// };
+export const getDataFromToken = (token) => {
+  return jwt.decode(token);
+};
 
 export const registerNewUser = async (formData) => {
   try {
@@ -66,6 +66,52 @@ export async function getCoffees() {
     const result = {
       errorMessage:
         'Network error, server is not available.',
+    };
+    return result;
+  }
+}
+
+export async function getOneCoffeeRating(productId) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/coffees/${productId}`,
+    );
+    const result = await response.json();
+    return result;
+  } catch {
+    const result = {
+      errorMessage:
+        'Network error, server is not available.',
+    };
+    return result;
+  }
+}
+
+export const createNewRating = async (productId, formData) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/coffees/${productId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: formData.productId,
+          userName: formData.userName,
+          ratingNumber: formData.ratingNumber,
+          comment: formData.comment,
+        }),
+      },
+    );
+    const result = await response.json();
+    result.status = response.status;
+    return result;
+  } catch {
+    const result = {
+      status: 500,
+      message:
+        'Network error, server is unavailable.',
     };
     return result;
   }

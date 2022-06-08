@@ -36,11 +36,30 @@ section {
 
 .cup-coffee {
   // width: 15vw;
-  height: 42vh;
+  height: 50vh;
   padding-left: 5vw;
 }
 
 .register-container {
   display: flex;
   padding-left: 5vw;
+  background-color: cadetblue;
+}
+
+.article--card {
+  background-color:#C6A477;
+  margin-top: 5vh;
+  width: 20vw;
+  height: 250px;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.acticle--icon {
+  width: 80px;
+  padding-top: 20px;
 }

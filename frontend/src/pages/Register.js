@@ -5,10 +5,10 @@ import '../scss/Register.scss';
 
 function Register() {
   return (
-    <section className='register'>
-      <div className='container'>
-        <h1 className='mb-4'>Regisztráció</h1>
-        <RegisterForm fetchFn={registerNewUser}/>
+    <section className="register">
+      <div className="container">
+        <h1 className="mb-4">Regisztráció</h1>
+        <RegisterForm fetchFn={registerNewUser} />
       </div>
     </section>
   );

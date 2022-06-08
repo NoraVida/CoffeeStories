@@ -11,12 +11,12 @@ function FormInput({
   wasValidated = false,
 }) {
   function getValidationClass() {
-    let className = "";
+    let className = '';
     if (wasValidated) {
       if (errorMessages.length === 0) {
-        className = "is-valid";
+        className = 'is-valid';
       } else {
-        className = "is-invalid";
+        className = 'is-invalid';
       }
     }
     return className;
@@ -24,18 +24,18 @@ function FormInput({
 
   return (
     <div className="mb-2">
-       <label htmlFor={id} className={labelClass}>
+      <label htmlFor={id} className={labelClass}>
         {labelText}
       </label>
       <input
         type={type}
         name={name}
         id={id}
-        className={inputClass + " " + getValidationClass()}
+        className={`${inputClass} ${getValidationClass()}`}
         onChange={handleOnChange}
         value={value}
-      ></input>
-      <div className={"invalid-feedback"}>
+      />
+      <div className="invalid-feedback">
         {errorMessages.length === 1 ? (
           <>{errorMessages[0]}</>
         ) : (
