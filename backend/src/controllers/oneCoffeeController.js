@@ -10,4 +10,19 @@ export const oneCoffeeController = {
       return next(error);
     }
   },
+  async post(req, res, next) {
+    try {
+      const { productId } = req.params;
+      const newRating = await oneCoffeeService.createNewRating({
+        productId,
+        // productId: req.body.productId, ????????
+        userName: req.body.userName,
+        ratingNumber: req.body.ratingNumber,
+        comment: req.body.comment,
+      });
+      return res.status(200).json(newRating);
+    } catch (error) {
+      return next(error);
+    }
+  },
 };

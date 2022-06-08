@@ -25,7 +25,9 @@ export const registerService = {
       email,
       password: hashedPassword,
     });
+
     await user.save();
+
     return {
       id: user._id,
       email,

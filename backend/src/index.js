@@ -1,7 +1,7 @@
 import logger from './logger';
 import app from './app';
 import config from './config';
-import connectToDatabase from './data/connection';
+import connectToDatabase from './database/connection';
 
 const PORT = config.port || 8080;
 
