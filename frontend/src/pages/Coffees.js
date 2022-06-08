@@ -51,7 +51,7 @@ function Coffees({
         </section>
       ) : (
         <section className="section-bottom">
-          <div>Szeretnél új kávét hozzáadni a listához? Regisztráció után megteheted</div>
+          <h6>Szeretnél új kávét hozzáadni a listához? Regisztráció után megteheted</h6>
           <button className="btn btn-primary mt-5" type="button">
             <Link className="link" to="/register">
               Irány a regisztráció

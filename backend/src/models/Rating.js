@@ -5,7 +5,7 @@ const ratingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'coffee',
   },
-  userName: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },

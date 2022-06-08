@@ -15,8 +15,8 @@ export const oneCoffeeController = {
       const { productId } = req.params;
       const newRating = await oneCoffeeService.createNewRating({
         productId,
-        // productId: req.body.productId, ????????
-        userName: req.body.userName,
+        // productId: req.body.productId,
+        user: req.body.user,
         ratingNumber: req.body.ratingNumber,
         comment: req.body.comment,
       });

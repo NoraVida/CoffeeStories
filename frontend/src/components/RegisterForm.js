@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import '../scss/Register.scss';
+import { useNavigate } from 'react-router-dom';
 
-export default function RegisterForm({ fetchFn }) {
+export default function RegisterForm({ fetchFn, navigate = useNavigate() }) {
   const {
     register,
     handleSubmit,
@@ -20,6 +21,7 @@ export default function RegisterForm({ fetchFn }) {
     if (result.status === 200) {
       setTimeout(() => {
         reset();
+        navigate('/login');
       }, 2000);
     }
   };
@@ -99,7 +101,7 @@ export default function RegisterForm({ fetchFn }) {
       </div>
 
       {(
-        isSubmitSuccessful && <div>Successful registration!</div>
+        isSubmitSuccessful && <div className="alert alert-success" role="alert">Sikeresen regisztráltál!</div>
       )}
       <button className="btn btn-primary mt-4" type="submit" value="Submit">Küldés</button>
     </form>

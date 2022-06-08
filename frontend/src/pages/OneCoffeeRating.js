@@ -9,43 +9,32 @@ import { getOneCoffeeRating, createNewRating } from '../helper/utils';
 import coffeeIconColor from '../assets/icons/coffee-cup-rating-color.png';
 import coffeeIconOpacity from '../assets/icons/coffee-cup-rating-opacity.png';
 
-function OneCoffeeRating(
-  // fetchOneProduct = getOneCoffeeRating,
-) {
+function OneCoffeeRating() {
   const [coffee, setCoffee] = useState({});
   const [ratings, setRatings] = useState([]);
   const { loggedInUser } = useAuthContext();
   const { productId } = useParams();
   const [formData, setFormData] = useState({
     productId,
-    userName: loggedInUser.name,
+    user: loggedInUser.userId,
     ratingNumber: 0,
     comment: "",
   });
-
-  const submitForm = async (formData) => {
-    // const result = await fetchFn(formData);
-    // if (result.status === 200) {
-    //   setTimeout(() => {
-    //     reset();
-    //   }, 2000);
-    // }
-  };
-
-  console.log(loggedInUser)
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     const result = await createNewRating(productId, formData);
     if (result.status === 200) {
-      // setTimeout(() => {
-      //   reset();
-      // }, 2000);
       console.log('okay')
     }
 
-      setFormData({});
+      setFormData({
+        productId,
+        userName: loggedInUser.userId,
+        ratingNumber: 0,
+        comment: "",
+      });
 
       event.target.reset();
       setFormData((formData) => ({
@@ -76,7 +65,7 @@ function OneCoffeeRating(
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [formData]);
 
   return (
     <>
@@ -91,7 +80,7 @@ function OneCoffeeRating(
       {ratings?.map((rating) => (
         <UserRating
           key={rating._id}
-          userName={rating.userName}
+          user={rating.user}
           ratingNumber={rating.ratingNumber}
           comment={rating.comment}
         />

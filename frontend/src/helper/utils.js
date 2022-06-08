@@ -98,7 +98,7 @@ export const createNewRating = async (productId, formData) => {
         },
         body: JSON.stringify({
           productId: formData.productId,
-          userName: formData.userName,
+          user: formData.user,
           ratingNumber: formData.ratingNumber,
           comment: formData.comment,
         }),

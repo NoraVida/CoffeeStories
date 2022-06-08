@@ -11,7 +11,7 @@ export const oneCoffeeService = {
 
       const [coffee, rating] = await Promise.all([
         Coffee.findOne({ _id: productId }),
-        Rating.find({ productId })
+        Rating.find({ productId }).populate('user')
       ]);
 
       return {
@@ -23,12 +23,10 @@ export const oneCoffeeService = {
     }
   },
 
-  async createNewRating({ productId, userName, ratingNumber, comment }) {
-
-
+  async createNewRating({ productId, user, ratingNumber, comment }) {
     const newRating = new Rating({
       productId, 
-      userName, 
+      user, 
       ratingNumber, 
       comment
     });
