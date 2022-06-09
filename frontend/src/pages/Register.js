@@ -7,7 +7,7 @@ function Register() {
   return (
     <section className="register">
       <div className="container">
-        <h1 className="mb-4">Regisztráció</h1>
+        <h2 className="mb-4">Regisztráció</h2>
         <RegisterForm fetchFn={registerNewUser} />
       </div>
     </section>

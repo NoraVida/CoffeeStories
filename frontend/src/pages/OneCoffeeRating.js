@@ -31,7 +31,7 @@ function OneCoffeeRating() {
 
       setFormData({
         productId,
-        userName: loggedInUser.userId,
+        user: loggedInUser.userId,
         ratingNumber: 0,
         comment: "",
       });
@@ -41,6 +41,8 @@ function OneCoffeeRating() {
         ...formData,
         'ratingNumber': 0,
       }));
+
+      updateCoffeeData();
   }
 
   function handleRatingChange(value) {
@@ -63,20 +65,29 @@ function OneCoffeeRating() {
     setRatings(OneProduct.oneCoffee.rating);
   }
 
+  function updateCoffeeData() {
+    setCoffee((coffee) => ({
+      ...coffee,
+      ratingNumber: coffee.ratingNumber + 1
+    }))
+  }
+
   useEffect(() => {
     getData();
   }, [formData]);
 
   return (
     <>
-      <Link to="/coffees">Vissza a kávékhoz</Link>
+      <button className="btn btn-primary ms-5 mt-4" type="button">
+        <Link to="/coffees" className="link">Vissza a kávékhoz</Link>
+      </button>
       <OneCoffee
         productName={coffee.name}
         productRating={coffee.rating}
         ratingNumber={coffee.ratingNumber}
         productDescription={coffee.description}
       />
-      <h2 className="p-4">Vélemények:</h2>
+      <h2 className="p-4 ps-5">Vélemények:</h2>
       {ratings?.map((rating) => (
         <UserRating
           key={rating._id}

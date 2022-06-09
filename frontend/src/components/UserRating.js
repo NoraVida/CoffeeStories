@@ -11,15 +11,17 @@ export default function UserRating({
 }) {
   return (
     <div className="card w-75 rating-card">
-      <div className="card-body">
-        <h5 className="card-title">{user?.name}</h5>
-        <Rating
-          fullSymbol={<img src={coffeeIconColor} alt="colorful coffee icon" className="icon" />}
-          emptySymbol={<img src={coffeeIconOpacity} alt="low opacity coffee icon" className="icon" />}
-          initialRating={ratingNumber}
-          readonly
-        />
-        <p className="card-text">
+      <div className="card-body rating-card--body">
+        <div className="name--rating">
+          <h5 className="card-title">{user?.name}</h5>
+          <Rating
+            fullSymbol={<img src={coffeeIconColor} alt="colorful coffee icon" className="icon" />}
+            emptySymbol={<img src={coffeeIconOpacity} alt="low opacity coffee icon" className="icon" />}
+            initialRating={ratingNumber}
+            readonly
+          />
+        </div>
+        <p className="card-text ps-5">
           &quot;
           {comment}
           &quot;

@@ -9,6 +9,7 @@ export default function RegisterForm({ fetchFn, navigate = useNavigate() }) {
     handleSubmit,
     reset,
     watch,
+    setError,
     formState: { errors, isSubmitSuccessful },
   } = useForm({
     reValidateMode: 'onChange',
@@ -18,6 +19,7 @@ export default function RegisterForm({ fetchFn, navigate = useNavigate() }) {
 
   const submitForm = async (formData) => {
     const result = await fetchFn(formData);
+    if (result.status === 400) setError('email', { type: 'systemErrorMessage', message: result.message });
     if (result.status === 200) {
       setTimeout(() => {
         reset();

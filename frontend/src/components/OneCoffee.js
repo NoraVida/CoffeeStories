@@ -22,8 +22,9 @@ export default function OneCoffee({
             initialRating={productRating}
             readonly
           />
-          <p>
+          <p className="ps-3">
             {ratingNumber}
+            {' '}
             értékelés
           </p>
         </div>

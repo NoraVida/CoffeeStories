@@ -1,10 +1,16 @@
-import React from 'react';
+/*eslint-disable*/
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../helper/AuthContext';
 import '../scss/Navbar.scss';
 
 export default function Navbar() {
   const { loggedInUser, setLoggedInUser } = useAuthContext();
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
+  const handleToggle = () => {
+    setNavbarOpen(!navbarOpen);
+  };
 
   return (
     <>
@@ -12,7 +18,7 @@ export default function Navbar() {
         <Link to="/" className="logo">
           KávéSztorik
         </Link>
-        <ul className="nav-links">
+        <ul className={`nav-links ${navbarOpen ? "nav-active" : null}`}>
           {loggedInUser?.userId ? (
             <li>
               <Link to="/" className="nav-link">
@@ -53,6 +59,11 @@ export default function Navbar() {
             </li>
           )}
         </ul>
+        <div className="burger" onClick={handleToggle}>
+          <div className="line1" />
+          <div className="line2" />
+          <div className="line3" />
+        </div>
       </nav>
     </>
   );

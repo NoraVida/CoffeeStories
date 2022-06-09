@@ -44,7 +44,7 @@ function Coffees({
         <section>
           <div>Nem találod a keresett kávét? Egészítsd ki a listát</div>
           <button className="btn btn-primary mt-5" type="button">
-            <Link className="link" to="/register">
+            <Link className="link" to="/createnewproduct">
               Új kávé hozzáadása
             </Link>
           </button>

@@ -116,3 +116,53 @@ export const createNewRating = async (productId, formData) => {
     return result;
   }
 };
+
+export const updateCoffeeRating = async (productId, coffeeState) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/coffees/${productId}`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify({
+          productRating: coffeeState.productRating,
+          ratingNumber: coffeeState.ratingNumber,
+        }),
+      },
+    );
+    const result = await response.json();
+    result.status = response.status;
+    return result;
+  } catch {
+    const result = {
+      status: 500,
+      message:
+        'Network error, server is unavailable.',
+    };
+    return result;
+  }
+};
+
+export const createNewProduct = async (formData) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/createnewproduct`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      },
+    );
+    const result = await response.json();
+    result.status = response.status;
+    return result;
+  } catch {
+    const result = {
+      status: 500,
+      message:
+        'Network error, server is unavailable.',
+    };
+    return result;
+  }
+};

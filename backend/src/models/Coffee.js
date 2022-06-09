@@ -4,6 +4,9 @@ const coffeeSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  brand: {
+    type: String,
+  },
   rating: {
     type: Number,
   },

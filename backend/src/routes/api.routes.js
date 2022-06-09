@@ -5,7 +5,9 @@ import {
   loginController,
   coffeeController,
   oneCoffeeController,
+  newProductController,
 } from '../controllers';
+// import authorization from '../middlewares/authorization';
 
 const router = express.Router();
 
@@ -17,5 +19,6 @@ router.post('/login', loginController.post);
 router.get('/coffees', coffeeController.get);
 router.get('/coffees/:productId', oneCoffeeController.get);
 router.post('/coffees/:productId', oneCoffeeController.post);
+router.post('/createnewproduct', newProductController.post);
 
 export default router;

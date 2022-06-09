@@ -1,7 +1,8 @@
-import React from 'react';
+/*eslint-disable*/
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
-import { getDataFromToken } from '../helper/utils';
+import { createNewProduct } from '../helper/utils';
 // import '../scss/Register.scss';
 
 export default function CreateNewProductForm({ fetchFn, setLoggedInUser }) {
@@ -17,73 +18,82 @@ export default function CreateNewProductForm({ fetchFn, setLoggedInUser }) {
     shouldFocusError: true,
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const submitForm = async (formData) => {
-    const result = await fetchFn(formData);
-    if (!result.error) {
-      setLoggedInUser(getDataFromToken(result.token));
-      localStorage.setItem('coffeeStoriesToken', result.token);
-      navigate('/coffees');
+    const result = await createNewProduct(formData);
+    // if (!result.error) {
+    //   navigate('/coffees');
       reset();
-    } else {
-      setError('email', {
-        type: 'systemErrorMessage',
-        message: result.message,
-      });
-    }
+    // } else {
+    //   setError('email', {
+    //     type: 'systemErrorMessage',
+    //     message: result.message,
+    //   });
+    // }
   };
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <div className="form-group">
         <input
-          type="email"
-          name="email"
-          className={`form-control mt-2 ${errors.email ? 'is-invalid' : ''}`}
-          placeholder="Email"
-          id="email"
-          {...register('email', {
-            required: 'Az email cím megadása kötelező',
-            pattern: {
-              value:
-              // eslint-disable-next-line
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: 'Az email cím nem megfelelő',
-            },
+          type="text"
+          name="name"
+          className={`form-control mt-2 ${errors.name ? 'is-invalid' : ''}`}
+          placeholder="Termék neve"
+          id="name"
+          {...register('name', {
+            required: 'A termék nevének megadása kötelező'
           })}
         />
         <div className="invalid-feedback">
-          {errors.email ? errors.email.message : ''}
+          {errors.name ? errors.name.message : ''}
         </div>
       </div>
       <div className="form-group">
         <input
-          type="password"
-          name="password"
-          placeholder="Jelszó"
-          className={`form-control mt-2 ${errors.password ? 'is-invalid' : ''}`}
-          id="password"
-          {...register('password', {
-            required: 'A jelszó megadása kötelező',
-            minLength: {
-              value: 8,
-              message: 'A jelszónak legalább 8 karaktert kell tartalmaznia',
-            },
+          type="text"
+          name="brand"
+          className={`form-control mt-2 ${errors.brand ? 'is-invalid' : ''}`}
+          placeholder="Termék márkája"
+          id="brand"
+          {...register('brand', {
+            required: 'A termék márkájának megadása kötelező'
           })}
         />
         <div className="invalid-feedback">
-          {errors.password ? errors.password.message : ''}
+          {errors.brand ? errors.brand.message : ''}
         </div>
+      </div>
+      <select className="form-select mt-2" {...register("type")}>
+        <option value="szemes">szemes</option>
+        <option value="őrölt">őrölt</option>
+        <option value="instant">instant</option>
+      </select>
+      <div className="form-group">
+        <input
+          type="text"
+          name="ingredient"
+          className={`form-control mt-2 ${errors.ingredient ? 'is-invalid' : ''}`}
+          placeholder="Összetétele"
+          id="ingredient"
+          {...register('ingredient', {
+            required: 'A termék összetételének megadása kötelező'
+          })}
+        />
+        <div className="invalid-feedback">
+          {errors.ingredient ? errors.ingredient.message : ''}
+        </div>
+      </div>
+      <div className="form-group">
+        <textarea 
+          className="form-control mt-2" 
+          name="description"
+          placeholder="Termékleírás"
+          // ref={register()}
+        />
       </div>
       {isSubmitSuccessful && <div>Successful registration!</div>}
-
-      <div className="mt-2">
-        <div>
-          Nincs még fiókod?
-        </div>
-        <Link to="/register">Ide kattintva regisztrálhatsz</Link>
-      </div>
 
       <button className="btn btn-primary mt-4" type="submit" value="Submit">Küldés</button>
     </form>

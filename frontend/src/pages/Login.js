@@ -9,7 +9,7 @@ function Login() {
   return (
     <section className="register">
       <div className="container">
-        <h1 className="mb-4">Bejelentkezés</h1>
+        <h2 className="mb-4">Bejelentkezés</h2>
         <LoginForm fetchFn={loginUser} setLoggedInUser={setLoggedInUser} />
       </div>
     </section>
