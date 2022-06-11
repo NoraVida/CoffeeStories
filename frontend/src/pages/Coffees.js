@@ -1,63 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Coffee from '../components/Coffee';
+import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
+import Section from '../components/Section';
 import { useAuthContext } from '../helper/AuthContext';
-import { getCoffees } from '../helper/utils';
-// import LoginForm from '../components/LoginForm';
-// import { loginUser } from '../helper/utils';
+import useFetch from '../helper/useFetch';
 
-function Coffees({
-  fetchProducts = getCoffees,
-  AuthContextFn = useAuthContext,
-}) {
-  const [data, setData] = useState([]);
-  const { loggedInUser } = AuthContextFn();
-
-  async function getData() {
-    const allProducts = await fetchProducts();
-    setData(allProducts);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+function Coffees() {
+  const { response, loading, error } = useFetch('/coffees');
+  const { loggedInUser } = useAuthContext();
 
   return (
     <>
-      <div className="coffee-container">
-        {data.coffees !== undefined ? data.coffees?.map((product) => (
-          <Coffee
-            key={product._id}
-            productId={product._id}
-            productName={product.name}
-            productRating={product.rating}
-            ratingNumber={product.ratingNumber}
-            productDescription={product.description}
-          />
-        )) : (
-          <div className="alert alert-warning" role="alert">
-            Sajnos a kávék jelenleg nem elérhetők
+      {loading && <Loading />}
+      {error && <ErrorMessage />}
+
+      {response && (
+        <>
+          <div className="coffee-container pt-3">
+            {response?.coffees.coffee.map((product) => (
+              <Coffee
+                key={product._id}
+                productId={product._id}
+                productName={product.name}
+                // productRating={product.rating}
+                // ratingNumber={product.ratingNumber}
+                productDescription={product.description}
+              />
+            ))}
           </div>
-        )}
-      </div>
-      {loggedInUser?.userId ? (
-        <section>
-          <div>Nem találod a keresett kávét? Egészítsd ki a listát</div>
-          <button className="btn btn-primary mt-5" type="button">
-            <Link className="link" to="/createnewproduct">
-              Új kávé hozzáadása
-            </Link>
-          </button>
-        </section>
-      ) : (
-        <section className="section-bottom">
-          <h6>Szeretnél új kávét hozzáadni a listához? Regisztráció után megteheted</h6>
-          <button className="btn btn-primary mt-5" type="button">
-            <Link className="link" to="/register">
-              Irány a regisztráció
-            </Link>
-          </button>
-        </section>
+          {loggedInUser?.userId ? (
+            <Section
+              mainText="Nem találod a keresett kávét?"
+              smallerText="Egészítsd ki a listát"
+              path="/createnewproduct"
+              btnText="Új kávé hozzáadása"
+            />
+          ) : (
+            <Section
+              mainText="Szeretnél új kávét hozzáadni a listához?"
+              smallerText="Regisztráció után megteheted"
+              path="/register"
+              btnText="Irány a regisztráció"
+            />
+          )}
+        </>
       )}
     </>
   );

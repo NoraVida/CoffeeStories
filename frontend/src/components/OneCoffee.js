@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import Rating from 'react-rating';
 import coffeeIconColor from '../assets/icons/coffee-cup-rating-color.png';
 import coffeeIconOpacity from '../assets/icons/coffee-cup-rating-opacity.png';
@@ -10,6 +9,9 @@ export default function OneCoffee({
   productDescription,
   productRating,
   ratingNumber,
+  brand,
+  type,
+  ingredient,
 }) {
   return (
     <div className="card w-75">
@@ -23,12 +25,17 @@ export default function OneCoffee({
             readonly
           />
           <p className="ps-3">
-            {ratingNumber}
+            {ratingNumber === undefined ? 0 : ratingNumber}
             {' '}
             értékelés
           </p>
         </div>
         <h3>Termék jellemzői:</h3>
+        <ul>
+          <li>{brand}</li>
+          <li>{type}</li>
+          <li>{ingredient}</li>
+        </ul>
         <h3>Termékleírás:</h3>
         <p className="card-text">{productDescription}</p>
       </div>

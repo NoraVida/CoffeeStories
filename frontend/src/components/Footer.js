@@ -7,6 +7,7 @@ export default function Footer() {
       <footer>
         <p>
           Copyright ©
+          {' '}
           {new Date().getFullYear()}
           {' '}
           Vida Nóra

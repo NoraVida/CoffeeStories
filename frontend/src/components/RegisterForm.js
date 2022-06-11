@@ -1,31 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import '../scss/Register.scss';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-export default function RegisterForm({ fetchFn, navigate = useNavigate() }) {
+export default function RegisterForm({
+  fetchFn,
+  // navigate = useNavigate()
+}) {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     watch,
-    setError,
+    // setError,
     formState: { errors, isSubmitSuccessful },
   } = useForm({
     reValidateMode: 'onChange',
     criteriaMode: 'all',
     shouldFocusError: true,
   });
+  const [fetchData, status, data] = fetchFn(
+    '/register', 'post',
+  );
 
-  const submitForm = async (formData) => {
-    const result = await fetchFn(formData);
-    if (result.status === 400) setError('email', { type: 'systemErrorMessage', message: result.message });
-    if (result.status === 200) {
-      setTimeout(() => {
-        reset();
-        navigate('/login');
-      }, 2000);
-    }
+  useEffect(() => {
+    // handle successful/failed fetch status and data/error
+  }, [status, data]);
+
+  // it doesnt work !!!
+  // const submitForm = async (formData) => {
+  //   const options = {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       name: formData.name,
+  //       email: formData.email,
+  //       password: formData.password,
+  //     }),
+  //   };
+  //   const result = await fetchFn('/register', options);
+  //   if (result.status === 400) setError('email', { type: 'systemErrorMessage', message: result.message });
+  //   if (result.status === 200) {
+  //     setTimeout(() => {
+  //       reset();
+  //       navigate('/login');
+  //     }, 2000);
+  //   }
+  // };
+
+  const submitForm = (formData) => {
+    fetchData(formData);
   };
 
   return (

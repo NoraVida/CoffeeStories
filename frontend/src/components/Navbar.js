@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        <Link to="/" className="logo">
+        <Link to="/" className="logo ps-5">
           KávéSztorik
         </Link>
         <ul className={`nav-links ${navbarOpen ? "nav-active" : null}`}>

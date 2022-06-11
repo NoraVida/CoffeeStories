@@ -53,7 +53,7 @@ h1 {
 }
 
 .article--card {
-  background-color:#C6A477;
+  background-color:#fef8d0;
   margin-top: 5vh;
   width: 20vw;
   height: 250px;
@@ -69,3 +69,55 @@ h1 {
   width: 80px;
   padding-top: 20px;
 }
+
+.section--container {
+  background-color: #C6A477;
+}
+
+.message-icon {
+  margin-top: 150px;
+}
+
+.loading-icon {
+  // padding-top: 300px;
+  // pointer-events: none;
+  // transition: transform .5s ease;
+  // transform: scale(1.5);
+  animation: example 4s linear infinite;
+}
+
+// @media (prefers-reduced-motion: no-preference) {
+//   .loading-icon {
+//     // animation: loading-icon-spin infinite 20s linear;
+//   }
+// }
+
+
+
+@keyframes example {
+  // 0%, 100% {
+  //   transform: translateX(0rem);
+  // }
+  
+  // 50% {
+  //   transform: translateX(7rem);
+  // }
+
+  from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+
+  // 100% {
+  //   transform: translateX(3rem);
+  // }
+  // from {
+  //   transform: rotate(0deg);
+  // }
+  // to {
+  //   transform: rotate(360deg);
+  // }
+}
+

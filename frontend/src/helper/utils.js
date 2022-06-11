@@ -117,15 +117,15 @@ export const createNewRating = async (productId, formData) => {
   }
 };
 
-export const updateCoffeeRating = async (productId, coffeeState) => {
+export const updateScoring = async (productId, scoringState) => {
   try {
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/coffees/${productId}`,
       {
         method: 'PATCH',
         body: JSON.stringify({
-          productRating: coffeeState.productRating,
-          ratingNumber: coffeeState.ratingNumber,
+          // productRating: scoringState.productRating,
+          ratingNumber: scoringState.ratingNumber,
         }),
       },
     );

@@ -4,8 +4,16 @@ export const oneCoffeeController = {
   async get(req, res, next) {
     try {
       const { productId } = req.params;
-      const oneCoffee = await oneCoffeeService.getOneCoffee(productId);
-      return res.status(200).json({ oneCoffee });
+      const {
+        coffee,
+        scoring,
+        rating,
+      } = await oneCoffeeService.getOneCoffee(productId);
+      return res.status(200).json({
+        coffee,
+        scoring,
+        rating,
+      });
     } catch (error) {
       return next(error);
     }
@@ -21,6 +29,21 @@ export const oneCoffeeController = {
         comment: req.body.comment,
       });
       return res.status(200).json(newRating);
+    } catch (error) {
+      return next(error);
+    }
+  },
+  async patch(req, res, next) {
+    try {
+      const { productId } = req.params;
+      const updatedScoring = await oneCoffeeService.updateScoringData({
+        productId,
+        // productId: req.body.productId,
+        // score: req.body.score,
+        // average: req.body.average,
+        ratingNumber: req.body.ratingNumber,
+      });
+      return res.status(200).json(updatedScoring);
     } catch (error) {
       return next(error);
     }

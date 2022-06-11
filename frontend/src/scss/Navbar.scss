@@ -10,6 +10,7 @@ nav {
   padding: 10px;
   min-height: 10vh;
   // min-height: 8vh;
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.5);
 }
 
 .logo {
@@ -57,9 +58,20 @@ nav {
   transform: translateX(0%);
 }
 
-// @media screen and (min-width: 1200px) {
-//   .nav-links {
-//     flex-direction: row;
-    
-//   }
+// @media screen and (min-width: 768px) and (max-width: 1199px) {
+  
 // }
+
+@media screen and (min-width: 1200px) {
+  .nav-links {
+    flex-direction: row;
+    position: static;
+    height: 4vw;
+    transform: none;
+    margin: auto;
+  }
+
+  .burger {
+    display: none;
+  }
+}

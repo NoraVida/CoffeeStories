@@ -26,11 +26,19 @@
 }
 
 .rating-card {
-  background-color:#C6A477;
+  background-color:#fef8d0;
+  border: none;
+  // background-color:#fef8d0;
+  // background-color:#D0BB94;
 }
 
 .container--rating {
-  display: flex;
+  padding-left: 6px;
+}
+
+.rating--ratingNumber {
+  padding-top: 10px;
+  padding-left: 6px;
 }
 
 h3 {
@@ -44,4 +52,15 @@ h3 {
 
 .name--rating {
   min-width: 150px;
+}
+
+@media screen and (min-width: 600px) {
+  .container--rating {
+    display: flex;
+  }
+
+  .rating--ratingNumber {
+    padding-top: 3px;
+    padding-left: 15px;
+  }
 }

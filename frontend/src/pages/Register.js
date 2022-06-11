@@ -1,14 +1,16 @@
 import React from 'react';
 import RegisterForm from '../components/RegisterForm';
-import { registerNewUser } from '../helper/utils';
+// import { registerNewUser } from '../helper/utils';
+// import useFetch from '../helper/useFetch';
+import useSubmitForm from '../helper/useSubmitForm';
 import '../scss/Register.scss';
 
 function Register() {
   return (
-    <section className="register">
-      <div className="container">
+    <section className="form--background">
+      <div className="card p-5 form--container">
         <h2 className="mb-4">Regisztráció</h2>
-        <RegisterForm fetchFn={registerNewUser} />
+        <RegisterForm fetchFn={useSubmitForm} />
       </div>
     </section>
   );

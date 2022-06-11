@@ -1,27 +1,29 @@
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// const useFetch = (url) => {
-//   const [loading, setLoading] = useState(true);
-//   const [data, setData] = useState(null);
-//   const [error, setError] = useState('');
+const useFetch = (path, options) => {
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-//   const fetchApi = ({ url, method, body = null, headers = null }) => {
-//     fetch(url) // 'https://jsonplaceholder.typicode.com/users'
-//     .then(response => {
-//       return response.json()
-//     })
-//     .then(json => {
-//       console.log(json)
-//       setLoading(false)
-//       setData(json)
-//     })
-//   };
+  const url = `${process.env.REACT_APP_BACKEND_URI}${path}`;
 
-//   useEffect(() => {
-//     fetchApi();
-//   }, []);
+  useEffect(() => {
+    const doFetch = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(url, options);
+        const json = await res.json();
+        setResponse(json);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    doFetch();
+  }, []);
 
-//   return { loading, data }
-// };
+  return { response, error, loading };
+};
 
-// export default useFetch;
+export default useFetch;

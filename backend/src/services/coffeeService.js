@@ -1,12 +1,20 @@
 import Coffee from '../models/Coffee';
+import Scoring from '../models/Scoring';
 import ApiError from '../error/ApiError';
 
 export const coffeeService = {
   async getCoffee() {
     // if (productId === null) {
     try {
-      const coffees = await Coffee.find({});
-      return coffees;
+      const [coffee, scoring] = await Promise.all([
+        Coffee.find(),
+        Scoring.find(),
+      ]);
+
+      return {
+        coffee,
+        scoring,
+      };
     } catch (error) {
       throw new ApiError(500, 'Database Error occurred while loading the Products');
     }
