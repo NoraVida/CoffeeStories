@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Footer from './components/Footer';
 import Coffees from './pages/Coffees';
 import OneCoffeeRating from './pages/OneCoffeeRating';
-import CreateNewProduct from './pages/CreateNewProduct';
+import NewProduct from './pages/NewProduct';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/coffees" element={<Coffees />} />
         <Route path="/coffees/:productId" element={<OneCoffeeRating />} />
-        <Route path="/createnewproduct" element={<CreateNewProduct />} />
+        <Route path="/createnewproduct" element={<NewProduct />} />
       </Routes>
       <Footer />
     </>

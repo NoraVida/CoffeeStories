@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { useState } from 'react';
 
 const useSubmitForm = (path, method) => {
@@ -19,6 +20,9 @@ const useSubmitForm = (path, method) => {
       });
 
       const json = await response.json();
+      const result = await response.json();
+      result.status = response.status;
+      return result;
 
       setData(json);
       setStatus('fetched');

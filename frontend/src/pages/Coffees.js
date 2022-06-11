@@ -1,4 +1,5 @@
-import React from 'react';
+/*eslint-disable*/
+import React, { useEffect } from 'react';
 import Coffee from '../components/Coffee';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
@@ -7,8 +8,24 @@ import { useAuthContext } from '../helper/AuthContext';
 import useFetch from '../helper/useFetch';
 
 function Coffees() {
-  const { response, loading, error } = useFetch('/coffees');
+  const {
+    executeFetch, response, loading, error,
+  } = useFetch('/coffees', null, { immediate: false });
   const { loggedInUser } = useAuthContext();
+
+  async function getData() {
+    const data = await executeFetch();
+    console.log(data)
+    // setCoffee(oneProduct.oneCoffee.coffee);
+    // setScoring(oneProduct.oneCoffee.scoring)
+    // setRatings(oneProduct.oneCoffee.rating);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(response)
 
   return (
     <>

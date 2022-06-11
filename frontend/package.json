@@ -25,6 +25,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.3",
     "sass": "^1.49.9",
+    "use-http": "^1.0.26",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

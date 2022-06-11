@@ -10,27 +10,23 @@ export default function LoginForm({ fetchFn, setLoggedInUser }) {
     handleSubmit,
     reset,
     setError,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({
     reValidateMode: 'onChange',
     criteriaMode: 'all',
     shouldFocusError: true,
   });
-
   const navigate = useNavigate();
 
   const submitForm = async (formData) => {
-    const result = await fetchFn(formData);
-    if (!result.error) {
+    const result = await fetchFn('/login', 'post', formData);
+    if (result.status === 200) {
       setLoggedInUser(getDataFromToken(result.token));
       localStorage.setItem('coffeeStoriesToken', result.token);
       navigate('/coffees');
       reset();
     } else {
-      setError('email', {
-        type: 'systemErrorMessage',
-        message: result.message,
-      });
+      setError('email', { type: 'systemErrorMessage', message: result.message });
     }
   };
 
@@ -76,9 +72,8 @@ export default function LoginForm({ fetchFn, setLoggedInUser }) {
           {errors.password ? errors.password.message : ''}
         </div>
       </div>
-      {isSubmitSuccessful && <div>Successful registration!</div>}
 
-      <div className="mt-2">
+      <div className="mt-4">
         <div>
           Nincs még fiókod?
         </div>

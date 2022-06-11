@@ -1,17 +1,18 @@
 import React from 'react';
-import CreateNewProductForm from '../components/CreateNewProductForm';
+import NewProductForm from '../components/NewProductForm';
 // import { registerNewUser } from '../helper/utils';
 // import '../scss/Register.scss';
+import { submitForm } from '../helper/utils';
 
-function CreateNewProduct() {
+function NewProduct() {
   return (
     <section className="form--background">
       <div className="card p-5 form--container">
         <h2 className="mb-4">Új termék létrehozása</h2>
-        <CreateNewProductForm />
+        <NewProductForm fetchFn={submitForm} />
       </div>
     </section>
   );
 }
 
-export default CreateNewProduct;
+export default NewProduct;
