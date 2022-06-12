@@ -181,11 +181,12 @@ export const updateScoring = async (productId, scoringState) => {
     const result = await response.json();
     result.status = response.status;
     return result;
-  } catch {
+  } catch (error) {
     const result = {
       status: 500,
       message:
-        'Network error, server is unavailable.',
+        error,
+      // 'Network error, server is unavailable.',
     };
     return result;
   }

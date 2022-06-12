@@ -5,7 +5,8 @@ import connectToDatabase from './database/connection';
 
 const PORT = config.port || 8080;
 
-connectToDatabase();
+const db = connectToDatabase();
+export default db;
 
 app.listen(PORT, () => {
   logger.info(`App is listening on ${PORT}`);

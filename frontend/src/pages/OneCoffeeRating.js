@@ -1,182 +1,97 @@
 /*eslint-disable*/
-import React, { useCallback, useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
-import Rating from "react-rating";
-import OneCoffee from "../components/OneCoffee";
-import UserRating from "../components/UserRating";
-import Section from "../components/Section";
-import { useAuthContext } from "../helper/AuthContext";
-import {
-  getOneCoffeeRating,
-  createNewRating,
-  updateScoring,
-} from "../helper/utils";
-import coffeeIconColor from "../assets/icons/coffee-cup-rating-color.png";
-import coffeeIconOpacity from "../assets/icons/coffee-cup-rating-opacity.png";
-// import useFetch from "../helper/useFetch";
-import { tryFetch } from "../helper/utils";
-import Loading from "../components/Loading";
-import ErrorMessage from "../components/ErrorMessage";
-import useFetch from 'use-http'
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import Rating from 'react-rating';
+import useFetch from 'use-http';
+
+import OneCoffee from '../components/OneCoffee';
+import UserRating from '../components/UserRating';
+import Section from '../components/Section';
+import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
+
+import { useAuthContext } from '../helper/AuthContext';
+import coffeeIconColor from '../assets/icons/coffee-cup-rating-color.png';
+import coffeeIconOpacity from '../assets/icons/coffee-cup-rating-opacity.png';
 
 function OneCoffeeRating() {
   const { productId } = useParams();
-  // let { response, loading, error } = useFetch(`/coffees/${productId}`);
-  // const {
-  //   executeFetch, response, loading, error,
-  // } = useFetch(`/coffees/${productId}`, null, { immediate: false });
-
+  const { loggedInUser } = useAuthContext();
   const [coffee, setCoffee] = useState({});
   const [ratings, setRatings] = useState([]);
   const [scoring, setScoring] = useState([]);
-  // const options = {};
-  const { get, post, response, loading, error } = useFetch(`http://localhost:8080/api/`,{
-    cache: "no-cache"
-  })
-
-  // const [response, setResponse] = useState({});
-  const { loggedInUser } = useAuthContext();
+  const {
+    get, post, response, loading, error,
+  } = useFetch(`http://localhost:8080/api`, {
+    // cache: 'no-cache'
+  });
   const [formData, setFormData] = useState({
     productId,
     user: loggedInUser.userId,
     ratingNumber: 0,
-    comment: "",
+    comment: '',
   });
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    // const result = await createNewRating(productId, formData);
-    // if (result.status === 200) {
-    //   console.log('console')
-      
-    //   // const result = await updateScoring(productId, scoring);
-    //   // console.log(result);
-
-    //   // response, loading, error = useFetch("/coffees");
-    //   // getData();
-    //   // response, loading, error = useFetch(`/coffees/${productId}`);
-
-    // }
-    const newTodo = await post(`/coffees/${productId}`, formData)
+    const newData = await post(`/coffees/${productId}`, formData);
     if (response.ok) {
-      updateScoringData();
-      // getData();
-      // fetchData();
-      const { get, post, response, loading, error } = useFetch(`http://localhost:8080/api/`,{
-      cache: "no-cache"
-      })
-      const data = await get(`/coffees/${productId}`)
-      if (response.ok) {
-      setCoffee(data.coffee)
-      setScoring(data.scoring)
-      setRatings(data.rating)
-      }
+      setCoffee(newData.coffee);
+      setScoring(newData.scoring);
+      setRatings(newData.rating);
     }
 
     setFormData({
       productId,
       user: loggedInUser.userId,
       ratingNumber: 0,
-      comment: "",
+      comment: '',
     });
 
     event.target.reset();
-    setFormData((formData) => ({
+    setFormData(() => ({
       ...formData,
       ratingNumber: 0,
     }));
   }
 
-  // console.log(response);
-
-  function updateScoringData() {
-    setScoring({
-      ...scoring,
-      ratingNumber: scoring.ratingNumber + 1,
-    });
-  }
-
   function handleRatingChange(value) {
-    setFormData((formData) => ({
+    setFormData(() => ({
       ...formData,
       ratingNumber: value,
     }));
   }
 
   function handleTextareaChange(event) {
-    setFormData((formData) => ({
+    setFormData(() => ({
       ...formData,
       [event.target.name]: event.target.value,
     }));
   }
 
-  // async function getData() {
-  //   response = await tryFetch(`/coffees/${productId}`);
-  //   console.log(response)
-  //   // setCoffee(oneProduct.oneCoffee.coffee);
-  //   // setScoring(oneProduct.oneCoffee.scoring)
-  //   // setRatings(oneProduct.oneCoffee.rating);
-  // }
-
-  // async function useFetchHook() {
-  //   const { response, loading, error } = await useFetch(`/coffees/${productId}`);
-  //   // setCoffee(oneProduct.oneCoffee.coffee);
-  //   setScoring(response)
-  //   // setRatings(oneProduct.oneCoffee.rating);
-  // }
-
   async function getData() {
-    const data = await get(`/coffees/${productId}`)
+    const data = await get(`/coffees/${productId}`);
     if (response.ok) {
-      setCoffee(data.coffee)
-      setScoring(data.scoring)
-      setRatings(data.rating)
+      setCoffee(data.coffee);
+      setScoring(data.scoring);
+      setRatings(data.rating);
     }
-    // setCoffee(oneProduct.oneCoffee.coffee);
-    // setScoring(oneProduct.oneCoffee.scoring)
-    // setRatings(oneProduct.oneCoffee.rating);
   }
 
-  // const fetchData = useCallback(async () => {
-  //   const data = await get(`/coffees/${productId}`);
-  //   if (response.ok) {
-  //     setCoffee(data.coffee)
-  //     setScoring(data.scoring)
-  //     setRatings(data.rating)
-  //   }
-  //   console.log(data);
-  // }, [get]);
-
-  // useEffect(() => {
-  //   getData();
-  //   // fetchData();
-  //   // useFetchHook();
-  //   // tryFetch()
-  // }, []);
-
-  const mounted = useRef(false)
-  useEffect(() => { // componentDidMount
-    if (!mounted.current) {
-      getData();
-      mounted.current = true
-    }
-  }, [])
-
-  // console.log(coffee)
-
-  // useEffect(() => {
-  //   response && setScoring(response.rating);
-  // }, []);
-
-  // console.log(response)
+  // const mounted = useRef(false);
+  useEffect(() => {
+    // if (!mounted.current) {
+    getData();
+    //   mounted.current = true,
+    // }
+  }, []);
 
   return (
     <>
 
       {loading && <Loading />}
       {error && <ErrorMessage />}
-
 
       {response && (
         <>

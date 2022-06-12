@@ -21,14 +21,16 @@ export const oneCoffeeController = {
   async post(req, res, next) {
     try {
       const { productId } = req.params;
-      const newRating = await oneCoffeeService.createNewRating({
+      const newData = await oneCoffeeService.createNewRating({
         productId,
         // productId: req.body.productId,
         user: req.body.user,
+        // headerből
         ratingNumber: req.body.ratingNumber,
         comment: req.body.comment,
       });
-      return res.status(200).json(newRating);
+      console.log(newData);
+      return res.status(200).json(newData);
     } catch (error) {
       return next(error);
     }
@@ -39,8 +41,8 @@ export const oneCoffeeController = {
       const updatedScoring = await oneCoffeeService.updateScoringData({
         productId,
         // productId: req.body.productId,
-        // score: req.body.score,
-        // average: req.body.average,
+        scores: req.body.scores,
+        average: req.body.average,
         ratingNumber: req.body.ratingNumber,
       });
       return res.status(200).json(updatedScoring);
