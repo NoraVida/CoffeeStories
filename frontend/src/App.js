@@ -1,15 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
-import './scss/App.scss';
+
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 import Main from './pages/Main';
 import Register from './pages/Register';
-import Navbar from './components/Navbar';
 import Login from './pages/Login';
-import Footer from './components/Footer';
 import Coffees from './pages/Coffees';
 import OneCoffeeRating from './pages/OneCoffeeRating';
 import NewProduct from './pages/NewProduct';
+import UserProfile from './pages/UserProfile';
+import About from './pages/About';
 
-function App() {
+import './scss/App.scss';
+
+export default function App() {
   return (
     <>
       <Navbar />
@@ -21,10 +26,10 @@ function App() {
         <Route path="/coffees" element={<Coffees />} />
         <Route path="/coffees/:productId" element={<OneCoffeeRating />} />
         <Route path="/createnewproduct" element={<NewProduct />} />
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </>
   );
 }
-
-export default App;

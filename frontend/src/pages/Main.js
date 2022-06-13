@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../scss/Main.scss';
+
 import coffeeImg from '../assets/img/cup-coffee.jpg';
 import coffeeCupIcon from '../assets/icons/coffeecup.png';
 
-function Main() {
+import '../scss/Main.scss';
+
+export default function Main() {
   return (
     <>
       <section className="find-your-coffee">
@@ -28,8 +30,8 @@ function Main() {
           <article className="article--card">Új kávémárkák megjelenítse</article>
         </div>
         <button className="btn btn-primary mt-5" type="button">
-          <Link className="link" to="/">
-            Tudj meg rólunk többet
+          <Link className="link" to="/about">
+            Tudj meg többet az oldaról
           </Link>
         </button>
       </section>
@@ -49,5 +51,3 @@ function Main() {
     </>
   );
 }
-
-export default Main;

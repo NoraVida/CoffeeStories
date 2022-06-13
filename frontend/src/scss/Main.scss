@@ -15,7 +15,7 @@ h1 {
 }
 
 .find-your-coffee {
-  background-image: url('../assets/img/main-background2.png');
+  background-image: url('../assets/img/main-background3.png');
   background-size: cover;
   overflow: hidden;
   text-align: center;
@@ -79,45 +79,23 @@ h1 {
 }
 
 .loading-icon {
-  // padding-top: 300px;
-  // pointer-events: none;
-  // transition: transform .5s ease;
-  // transform: scale(1.5);
   animation: example 4s linear infinite;
 }
 
-// @media (prefers-reduced-motion: no-preference) {
-//   .loading-icon {
-//     // animation: loading-icon-spin infinite 20s linear;
-//   }
-// }
-
-
-
 @keyframes example {
-  // 0%, 100% {
-  //   transform: translateX(0rem);
-  // }
-  
-  // 50% {
-  //   transform: translateX(7rem);
-  // }
-
   from {
       transform: rotate(0deg);
     }
     to {
       transform: rotate(360deg);
     }
-
-  // 100% {
-  //   transform: translateX(3rem);
-  // }
-  // from {
-  //   transform: rotate(0deg);
-  // }
-  // to {
-  //   transform: rotate(360deg);
-  // }
 }
 
+.btn--go-to-coffees {
+  margin: 155px;
+}
+
+.about-text {
+  text-align: justify;
+  padding-bottom: 25px;
+}

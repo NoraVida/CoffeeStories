@@ -1,10 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
-import { getDataFromToken } from '../helper/utils';
-// import '../scss/Register.scss';
+import useFetch from 'use-http';
 
-export default function LoginForm({ fetchFn, setLoggedInUser }) {
+import { getDataFromToken } from '../helper/utils';
+
+export default function LoginForm({ setLoggedInUser }) {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,17 +19,28 @@ export default function LoginForm({ fetchFn, setLoggedInUser }) {
     criteriaMode: 'all',
     shouldFocusError: true,
   });
-  const navigate = useNavigate();
+
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const {
+    request, response,
+  } = useFetch(`${process.env.REACT_APP_BACKEND_URI}`, options);
 
   const submitForm = async (formData) => {
-    const result = await fetchFn('/login', 'post', formData);
-    if (result.status === 200) {
+    const result = await request.post('/login', formData);
+    if (response.ok) {
       setLoggedInUser(getDataFromToken(result.token));
       localStorage.setItem('coffeeStoriesToken', result.token);
       navigate('/coffees');
       reset();
-    } else {
+    } else if (result.message === 'Nem helyes email') {
       setError('email', { type: 'systemErrorMessage', message: result.message });
+    } else {
+      setError('password', { type: 'systemErrorMessage', message: result.message });
     }
   };
 
@@ -77,7 +91,7 @@ export default function LoginForm({ fetchFn, setLoggedInUser }) {
         <div>
           Nincs még fiókod?
         </div>
-        <Link to="/register">Ide kattintva regisztrálhatsz</Link>
+        <Link to="/user">Ide kattintva regisztrálhatsz</Link>
       </div>
 
       <button className="btn btn-primary mt-4" type="submit" value="Submit">Küldés</button>

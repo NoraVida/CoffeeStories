@@ -1,31 +1,29 @@
-/*eslint-disable*/
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import useFetch from 'use-http';
+
 import Coffee from '../components/Coffee';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 import Section from '../components/Section';
+
 import { useAuthContext } from '../helper/AuthContext';
-import useFetch from '../helper/useFetch';
 
 function Coffees() {
-  const {
-    executeFetch, response, loading, error,
-  } = useFetch('/coffees', null, { immediate: false });
   const { loggedInUser } = useAuthContext();
+  const [data, setData] = useState({});
+
+  const {
+    request, response, loading, error,
+  } = useFetch(`${process.env.REACT_APP_BACKEND_URI}`);
 
   async function getData() {
-    const data = await executeFetch();
-    console.log(data)
-    // setCoffee(oneProduct.oneCoffee.coffee);
-    // setScoring(oneProduct.oneCoffee.scoring)
-    // setRatings(oneProduct.oneCoffee.rating);
+    const result = await request.get('/coffees');
+    setData(result);
   }
 
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(response)
 
   return (
     <>
@@ -35,13 +33,11 @@ function Coffees() {
       {response && (
         <>
           <div className="coffee-container pt-3">
-            {response?.coffees.coffee.map((product) => (
+            {data.coffees?.coffee.map((product) => (
               <Coffee
                 key={product._id}
                 productId={product._id}
                 productName={product.name}
-                // productRating={product.rating}
-                // ratingNumber={product.ratingNumber}
                 productDescription={product.description}
               />
             ))}

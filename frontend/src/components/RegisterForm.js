@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../scss/Register.scss';
 import { useNavigate } from 'react-router-dom';
+import useFetch from 'use-http';
 
-export default function RegisterForm({
-  fetchFn,
-  // navigate = useNavigate()
-}) {
+import '../scss/Register.scss';
+
+export default function RegisterForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,54 +20,29 @@ export default function RegisterForm({
     criteriaMode: 'all',
     shouldFocusError: true,
   });
-  const navigate = useNavigate();
-  // const [fetchData, status, data] = fetchFn(
-  //   '/register', 'post',
-  // );
 
-  // useEffect(() => {
-  //   // handle successful/failed fetch status and data/error
-  // }, [status, data]);
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  // it doesnt work !!!
-  // const submitForm = async (formData) => {
-  //   const options = {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       name: formData.name,
-  //       email: formData.email,
-  //       password: formData.password,
-  //     }),
-  //   };
-  //   const result = await fetchFn('/register', options);
-  //   if (result.status === 400) setError('email', { type: 'systemErrorMessage', message: result.message });
-  //   if (result.status === 200) {
-  //     setTimeout(() => {
-  //       reset();
-  //       navigate('/login');
-  //     }, 2000);
-  //   }
-  // };
+  const {
+    request, response,
+  } = useFetch(`${process.env.REACT_APP_BACKEND_URI}`, options);
 
   const submitForm = async (formData) => {
-    const result = await fetchFn('/register', 'post', formData);
+    const result = await request.post('/register', formData);
     if (result.status === 400) {
       setError('email', { type: 'systemErrorMessage', message: result.message });
     }
-    if (result.status === 200) {
+    if (response.ok) {
       setTimeout(() => {
         reset();
         navigate('/login');
       }, 2000);
     }
   };
-
-  // const submitForm = (formData) => {
-  //   fetchData(formData);
-  // };
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>

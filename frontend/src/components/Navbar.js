@@ -1,7 +1,8 @@
-/*eslint-disable*/
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useAuthContext } from '../helper/AuthContext';
+
 import '../scss/Navbar.scss';
 
 export default function Navbar() {
@@ -18,10 +19,10 @@ export default function Navbar() {
         <Link to="/" className="logo ps-5">
           KávéSztorik
         </Link>
-        <ul className={`nav-links ${navbarOpen ? "nav-active" : null}`}>
+        <ul className={`nav-links ${navbarOpen ? 'nav-active' : null}`}>
           {loggedInUser?.userId ? (
             <li>
-              <Link to="/" className="nav-link">
+              <Link to="/user" className="nav-link">
                 {loggedInUser.name}
               </Link>
             </li>
@@ -34,7 +35,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link">
+            <Link to="/about" className="nav-link">
               Az oldalról
             </Link>
           </li>
@@ -59,7 +60,7 @@ export default function Navbar() {
             </li>
           )}
         </ul>
-        <div className="burger" onClick={handleToggle}>
+        <div className="burger" onClick={handleToggle} onKeyDown={handleToggle} role="button" tabIndex={0}>
           <div className="line1" />
           <div className="line2" />
           <div className="line3" />

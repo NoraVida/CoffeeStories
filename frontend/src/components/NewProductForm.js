@@ -1,35 +1,39 @@
-/*eslint-disable*/
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
-import { createNewProduct } from "../helper/utils";
-// import '../scss/Register.scss';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import useFetch from 'use-http';
 
-export default function NewProductForm({ fetchFn, setLoggedInUser }) {
+import { getTokenFromLocalStorage } from '../helper/utils';
+
+export default function NewProductForm() {
   const {
     register,
     handleSubmit,
-    reset,
-    setError,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({
-    reValidateMode: "onChange",
-    criteriaMode: "all",
+    reValidateMode: 'onChange',
+    criteriaMode: 'all',
     shouldFocusError: true,
   });
+
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...(getTokenFromLocalStorage() && { Authorization: `Bearer ${getTokenFromLocalStorage()}` }),
+    },
+  };
+
+  const {
+    post, response,
+  } = useFetch(`${process.env.REACT_APP_BACKEND_URI}`, options);
+
   const navigate = useNavigate();
 
   const submitForm = async (formData) => {
-    const result = await fetchFn('/createnewproduct', 'post', formData);
-    if (result.status === 200) {
+    await post('/createnewproduct', formData);
+    if (response.ok) {
       navigate('/coffees');
-    } 
-    //else {
-    //   setError('email', {
-    //     type: 'systemErrorMessage',
-    //     message: result.message,
-    //   });
-    // }
+    }
   };
 
   return (
@@ -38,37 +42,37 @@ export default function NewProductForm({ fetchFn, setLoggedInUser }) {
         <input
           type="text"
           name="name"
-          className={`form-control mt-2 ${errors.name ? "is-invalid" : ""}`}
+          className={`form-control mt-2 ${errors.name ? 'is-invalid' : ''}`}
           placeholder="Termék neve"
           id="name"
-          {...register("name", {
-            required: "A név megadása kötelező",
+          {...register('name', {
+            required: 'A név megadása kötelező',
           })}
         />
         <div className="invalid-feedback">
-          {errors.name ? errors.name.message : ""}
+          {errors.name ? errors.name.message : ''}
         </div>
       </div>
       <div className="form-group">
         <input
           type="text"
           name="brand"
-          className={`form-control mt-2 ${errors.brand ? "is-invalid" : ""}`}
+          className={`form-control mt-2 ${errors.brand ? 'is-invalid' : ''}`}
           placeholder="Termék márkája"
           id="brand"
-          {...register("brand", {
-            required: "A márka megadása kötelező",
+          {...register('brand', {
+            required: 'A márka megadása kötelező',
           })}
         />
         <div className="invalid-feedback">
-          {errors.brand ? errors.brand.message : ""}
+          {errors.brand ? errors.brand.message : ''}
         </div>
       </div>
       <select
         name="type"
-        className={`form-select mt-2 ${errors.brand ? "is-invalid" : ""}`}
-        {...register("type", {
-          required: "A típus kiválasztása kötelező",
+        className={`form-select mt-2 ${errors.brand ? 'is-invalid' : ''}`}
+        {...register('type', {
+          required: 'A típus kiválasztása kötelező',
         })}
       >
         <option value="">Válassz!</option>
@@ -77,38 +81,38 @@ export default function NewProductForm({ fetchFn, setLoggedInUser }) {
         <option value="instant">instant</option>
       </select>
       <div className="invalid-feedback">
-        {errors.type ? errors.type.message : ""}
+        {errors.type ? errors.type.message : ''}
       </div>
       <div className="form-group">
         <input
           type="text"
           name="ingredient"
           className={`form-control mt-2 ${
-            errors.ingredient ? "is-invalid" : ""
+            errors.ingredient ? 'is-invalid' : ''
           }`}
           placeholder="Összetétele"
           id="ingredient"
-          {...register("ingredient", {
-            required: "Az összetétel megadása kötelező",
+          {...register('ingredient', {
+            required: 'Az összetétel megadása kötelező',
           })}
         />
         <div className="invalid-feedback">
-          {errors.ingredient ? errors.ingredient.message : ""}
+          {errors.ingredient ? errors.ingredient.message : ''}
         </div>
       </div>
       <div className="form-group">
         <textarea
           className={`form-control mt-2 ${
-            errors.description ? "is-invalid" : ""
+            errors.description ? 'is-invalid' : ''
           }`}
           name="description"
           placeholder="Termékleírás"
-          {...register("description", {
-            required: "A leírás megadása kötelező",
+          {...register('description', {
+            required: 'A leírás megadása kötelező',
           })}
         />
         <div className="invalid-feedback">
-          {errors.description ? errors.description.message : ""}
+          {errors.description ? errors.description.message : ''}
         </div>
       </div>
 
