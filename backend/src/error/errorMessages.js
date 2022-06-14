@@ -6,6 +6,6 @@ export const errorMessages = {
   wrongData: 'Email or password is incorrect.',
   server: 'Internal Server Error',
   noUserId: 'Can\'t find user profile',
-  wrongOldPassword: 'Current password is incorrect',
+  wrongOldPassword: 'Nem helyes a jelszó',
   databaseArticle: 'Database Error occurred while loading the Articles',
 };

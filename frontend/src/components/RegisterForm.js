@@ -32,7 +32,7 @@ export default function RegisterForm() {
   } = useFetch(`${process.env.REACT_APP_BACKEND_URI}`, options);
 
   const submitForm = async (formData) => {
-    const result = await request.post('/register', formData);
+    const result = await request.post('/user', formData);
     if (result.status === 400) {
       setError('email', { type: 'systemErrorMessage', message: result.message });
     }

@@ -43,19 +43,19 @@ export const oneCoffeeController = {
   //     return next(error);
   //   }
   // },
-  // async delete(req, res, next) {
-  //   try {
-  //     const { productId } = req.params;
-  //     const updatedData = await oneCoffeeService.deleteRating({
-  //       // productId,
-  //       // // productId: req.body.productId,
-  //       // scores: req.body.scores,
-  //       // average: req.body.average,
-  //       // ratingNumber: req.body.ratingNumber,
-  //     });
-  //     return res.status(200).json(updatedData);
-  //   } catch (error) {
-  //     return next(error);
-  //   }
-  // },
+  async delete(req, res, next) {
+    try {
+      const { productId } = req.params;
+      const updatedData = await oneCoffeeService.deleteRating({
+        // productId,
+        // // productId: req.body.productId,
+        // scores: req.body.scores,
+        // average: req.body.average,
+        // ratingNumber: req.body.ratingNumber,
+      });
+      return res.status(200).json(updatedData);
+    } catch (error) {
+      return next(error);
+    }
+  },
 };
