@@ -1,10 +1,11 @@
 import bcrypt from 'bcrypt';
-import ApiError from '../error/ApiError';
-import User from '../models/User';
-import { validateRegister } from '../validation/registerValidation';
-import { errorMessages } from '../error/errorMessages';
 
-export const registerService = {
+import User from '../models/User';
+import ApiError from '../error/ApiError';
+import { errorMessages } from '../error/errorMessages';
+import { validateRegister } from '../validation/registerValidation';
+
+export const userService = {
   async register({ name, email, password }) {
     const { error } = validateRegister({ name, email, password });
 

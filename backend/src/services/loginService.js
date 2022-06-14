@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { validateLogin } from '../validation/loginValidation';
-import ApiError from '../error/ApiError';
-import User from '../models/User';
+
 import config from '../config';
+import User from '../models/User';
+import ApiError from '../error/ApiError';
+import { validateLogin } from '../validation/loginValidation';
 
 export const loginService = {
   async authenticate({ email, password }) {
@@ -22,7 +23,7 @@ export const loginService = {
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      throw new ApiError(400, 'Nem helyes jelszó');
+      throw new ApiError(401, 'Nem helyes jelszó');
     }
 
     const token = jwt.sign(

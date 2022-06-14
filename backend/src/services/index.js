@@ -1,4 +1,4 @@
-export * from './registerService';
+export * from './userService';
 export * from './loginService';
 export * from './coffeeService';
 export * from './oneCoffeeService';

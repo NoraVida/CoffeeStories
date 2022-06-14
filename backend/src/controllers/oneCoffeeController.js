@@ -25,29 +25,37 @@ export const oneCoffeeController = {
         productId,
         // productId: req.body.productId,
         user: req.body.user,
-        // headerből
+        // header
         ratingNumber: req.body.ratingNumber,
         comment: req.body.comment,
       });
-      console.log(newData);
       return res.status(200).json(newData);
     } catch (error) {
       return next(error);
     }
   },
-  async patch(req, res, next) {
-    try {
-      const { productId } = req.params;
-      const updatedScoring = await oneCoffeeService.updateScoringData({
-        productId,
-        // productId: req.body.productId,
-        scores: req.body.scores,
-        average: req.body.average,
-        ratingNumber: req.body.ratingNumber,
-      });
-      return res.status(200).json(updatedScoring);
-    } catch (error) {
-      return next(error);
-    }
-  },
+  // async delete(req, res, next) {
+  //   const { orderId } = req.params;
+  //   try {
+  //     const confirmation = await orderService.deleteOrder(orderId);
+  //     return res.status(200).json(confirmation);
+  //   } catch (error) {
+  //     return next(error);
+  //   }
+  // },
+  // async delete(req, res, next) {
+  //   try {
+  //     const { productId } = req.params;
+  //     const updatedData = await oneCoffeeService.deleteRating({
+  //       // productId,
+  //       // // productId: req.body.productId,
+  //       // scores: req.body.scores,
+  //       // average: req.body.average,
+  //       // ratingNumber: req.body.ratingNumber,
+  //     });
+  //     return res.status(200).json(updatedData);
+  //   } catch (error) {
+  //     return next(error);
+  //   }
+  // },
 };

@@ -1,9 +1,9 @@
-import { registerService } from '../services';
+import { userService } from '../services';
 
-export const registerController = {
+export const userController = {
   async post(req, res, next) {
     try {
-      const data = await registerService.register({
+      const data = await userService.register({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,

@@ -1,4 +1,4 @@
-export * from './registerController';
+export * from './userController';
 export * from './loginController';
 export * from './coffeeController';
 export * from './oneCoffeeController';
