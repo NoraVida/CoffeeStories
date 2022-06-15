@@ -18,22 +18,28 @@
   padding: 15px;
 }
 
-.alert {
-  width: 70vw;
-  margin: auto;
-  margin-top: 20px;
-  
-}
-
-.rating-card {
+#product-card{
   background-color:#fef8d0;
   border: none;
-  // background-color:#fef8d0;
-  // background-color:#D0BB94;
 }
 
-.container--rating {
-  padding-left: 6px;
+#user-rating-card {
+  background-color: #C6A477;
+  border: none;
+}
+
+.onecoffee-back-btn {
+  padding-left: 12.5%;
+  margin-top: 30px;
+}
+
+#your-rating-card {
+  background-color: #C6A477;
+  border: none;
+}
+
+.rating-title {
+  padding-left: 12.5%;
 }
 
 .rating--ratingNumber {
@@ -47,7 +53,16 @@ h3 {
 }
 
 .rating-card--body {
-  display: flex;
+  text-align: justify;
+}
+
+.coffee-rating--text {
+  padding-top: 10px;
+  padding-left: 4px;
+}
+
+.rating-card--text {
+  padding-top: 20px;
 }
 
 .name--rating {
@@ -58,9 +73,26 @@ h3 {
   .container--rating {
     display: flex;
   }
+}
+
+@media screen and (min-width: 1100px) {
+  .rating-card--body {
+    display: flex;
+  }
+
+  .rating-card--text {
+    padding-top: 10px;
+    padding-left: 30px;
+  }
 
   .rating--ratingNumber {
     padding-top: 3px;
     padding-left: 15px;
+  }
+
+  .rating-delete-btn {
+    margin-left: 25px;
+    margin-top: 13px;
+    height: 40px;
   }
 }

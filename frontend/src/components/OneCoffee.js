@@ -14,7 +14,7 @@ export default function OneCoffee({
   ingredient,
 }) {
   return (
-    <div className="card w-75">
+    <div className="card w-75 mt-4" id="product-card">
       <div className="card-body">
         <h2 className="card-title">{productName}</h2>
         <div className="container--rating">
@@ -24,7 +24,7 @@ export default function OneCoffee({
             initialRating={productRating}
             readonly
           />
-          <p className="ps-3">
+          <p className="coffee-rating--text">
             {ratingNumber === undefined ? 0 : ratingNumber}
             {' '}
             értékelés

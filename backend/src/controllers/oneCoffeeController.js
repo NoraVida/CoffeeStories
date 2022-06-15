@@ -18,6 +18,7 @@ export const oneCoffeeController = {
       return next(error);
     }
   },
+
   async post(req, res, next) {
     try {
       const { productId } = req.params;
@@ -34,24 +35,13 @@ export const oneCoffeeController = {
       return next(error);
     }
   },
-  // async delete(req, res, next) {
-  //   const { orderId } = req.params;
-  //   try {
-  //     const confirmation = await orderService.deleteOrder(orderId);
-  //     return res.status(200).json(confirmation);
-  //   } catch (error) {
-  //     return next(error);
-  //   }
-  // },
+
   async delete(req, res, next) {
     try {
       const { productId } = req.params;
       const updatedData = await oneCoffeeService.deleteRating({
-        // productId,
-        // // productId: req.body.productId,
-        // scores: req.body.scores,
-        // average: req.body.average,
-        // ratingNumber: req.body.ratingNumber,
+        productId,
+        ratingId: req.query.ratingId,
       });
       return res.status(200).json(updatedData);
     } catch (error) {

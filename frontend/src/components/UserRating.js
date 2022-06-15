@@ -16,7 +16,7 @@ export default function UserRating({
   const { loggedInUser } = useAuthContext();
 
   return (
-    <div className="card w-75 rating-card">
+    <div className="card w-75" id="user-rating-card">
       <div className="card-body rating-card--body">
         <div className="name--rating">
           <h5 className="card-title">{user?.name}</h5>
@@ -27,13 +27,13 @@ export default function UserRating({
             readonly
           />
         </div>
-        <p className="card-text ps-5">
+        <p className="card-text rating-card--text">
           &quot;
           {comment}
           &quot;
         </p>
         {user._id === loggedInUser.userId ? (
-          <button className="btn btn-primary" type="button" onClick={onClickDelete}>
+          <button className="btn btn-primary rating-delete-btn" type="button" onClick={onClickDelete}>
             Törlés
           </button>
         ) : null }

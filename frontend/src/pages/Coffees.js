@@ -30,7 +30,13 @@ function Coffees() {
       {loading && <Loading />}
       {error && <ErrorMessage />}
 
-      {response && (
+      {response && data.coffees?.length === 0 ? (
+        <section className="form--background">
+          <div className="card w-75 rating-card">
+            <p>Jelenleg nincs megjeleníthető kávék</p>
+          </div>
+        </section>
+      ) : (
         <>
           <div className="coffee-container pt-3">
             {data.coffees?.coffee.map((product) => (

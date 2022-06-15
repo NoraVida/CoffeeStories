@@ -84,8 +84,8 @@ export const oneCoffeeService = {
         );
 
         data.coffee = await Coffee.findOne({ _id: productId }, null, { session });
-        data.rating = await Rating.find({ productId }, null, { session });
         data.scoring = await Scoring.findOne({ productId }, null, { session });
+        data.rating = await Rating.find({ productId }, null, { session }).populate('user');
       });
 
       await session.commitTransaction();
@@ -98,13 +98,51 @@ export const oneCoffeeService = {
     }
   },
 
-  // async deleteRating(orderId) {
-  //   try {
-  //     await Rating.deleteOne({ _id: orderId });
-  //     return { confirmation: ' deleted' };
-  //   } catch (error) {
-  //     throw new ApiError(400, 'Error while removing product');
-  //   }
-  // },
+  async deleteRating({ productId, ratingId }) {
+    let session;
+    const data = {};
+
+    try {
+      session = await mongoose.startSession();
+
+      await session.withTransaction(async () => {
+        const userRating = await Rating.findOne({ _id: ratingId }, null, { session }).populate('user');
+        const productScoring = await Scoring.findOne({ productId }, null, { session });
+
+        productScoring.scores.splice(productScoring.scores.indexOf(userRating.ratingNumber), 1);
+        // eslint-disable-next-line
+        const average = productScoring.scores.reduce((prev, current) => prev + current, 0) / productScoring.scores.length;
+
+        const decrement = -1;
+        await Scoring.findOneAndUpdate(
+          { productId },
+          {
+            $inc: {
+              ratingNumber: decrement,
+            },
+            $set: {
+              scores: productScoring.scores,
+              average,
+            },
+          },
+          { new: true, session },
+        );
+
+        await Rating.deleteOne({ _id: ratingId }, { session });
+
+        data.coffee = await Coffee.findOne({ _id: productId }, null, { session });
+        data.scoring = await Scoring.findOne({ productId }, null, { session });
+        data.rating = await Rating.find({ productId }, null, { session }).populate('user');
+      });
+
+      await session.commitTransaction();
+
+      return data;
+    } catch (error) {
+      await session.abortTransaction();
+    } finally {
+      session.endSession();
+    }
+  },
 
 };

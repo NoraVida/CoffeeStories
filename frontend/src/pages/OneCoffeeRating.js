@@ -26,6 +26,7 @@ export default function OneCoffeeRating() {
 
   const options = {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
       ...(getTokenFromLocalStorage() && { Authorization: `Bearer ${getTokenFromLocalStorage()}` }),
     },
@@ -93,13 +94,13 @@ export default function OneCoffeeRating() {
     getData();
   }, []);
 
-  const deleteRating = async () => {
-    // const updatedData = await request.delete(`/coffees/${productId}`);
-    // if (response.ok) {
-    //   setCoffee(updatedData.coffee);
-    //   setScoring(updatedData.scoring);
-    //   setRatings(updatedData.rating);
-    // }
+  const deleteRating = async (ratingId) => {
+    const updatedData = await request.delete(`/coffees/${productId}?ratingId=${ratingId}`);
+    if (response.ok) {
+      setCoffee(updatedData.coffee);
+      setScoring(updatedData.scoring);
+      setRatings(updatedData.rating);
+    }
   };
 
   return (
@@ -109,7 +110,7 @@ export default function OneCoffeeRating() {
 
       {coffee.name && (
         <>
-          <div className="card w-75">
+          <div className="onecoffee-back-btn">
             <button className="btn btn-primary" type="button">
               <Link to="/coffees" className="link">
                 Vissza a kávékhoz
@@ -126,9 +127,8 @@ export default function OneCoffeeRating() {
             productDescription={coffee.description}
           />
           {loggedInUser?.userId ? (
-            // <div className="section--container mt-5 p-5">
-            <div className="card w-75">
-              <h2>A Te értékelésed:</h2>
+            <div className="card w-75 mt-4" id="your-rating-card">
+              <h2 className="pb-3">A Te értékelésed:</h2>
               <form onSubmit={handleSubmit}>
                 <Rating
                   emptySymbol={(
@@ -148,11 +148,12 @@ export default function OneCoffeeRating() {
                   onChange={handleRatingChange}
                   initialRating={formData.ratingNumber}
                 />
-                <div className="form-group">
+                <div className="form-group pt-2">
                   <textarea
                     className="form-control"
                     name="comment"
                     onChange={handleTextareaChange}
+                    rows="4"
                   />
                 </div>
                 <button className="btn btn-primary mt-4" type="submit">Küldés</button>
@@ -166,21 +167,23 @@ export default function OneCoffeeRating() {
               btnText="Irány a regisztráció"
             />
           )}
-          <h2 className="pt-5">Vélemények:</h2>
+          <h2 className="pt-5 rating-title">Vélemények:</h2>
           {ratings && ratings?.length === 0 ? (
-            <div className="card w-75 rating-card">
+            <div className="card w-75 rating-card mb-5">
               <p>Ez a termék még nem kapott értékelést</p>
             </div>
           ) : (
-            ratings?.map((oneRating) => (
-              <UserRating
-                key={oneRating._id}
-                user={oneRating.user}
-                ratingNumber={oneRating.ratingNumber}
-                comment={oneRating.comment}
-                onClickDelete={deleteRating}
-              />
-            ))
+            <div className="pb-5">
+              {ratings?.map((oneRating) => (
+                <UserRating
+                  key={oneRating._id}
+                  user={oneRating.user}
+                  ratingNumber={oneRating.ratingNumber}
+                  comment={oneRating.comment}
+                  onClickDelete={() => deleteRating(oneRating._id)}
+                />
+              ))}
+            </div>
           )}
         </>
       )}
