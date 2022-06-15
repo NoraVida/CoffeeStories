@@ -39,6 +39,11 @@ export default function Navbar() {
               Az oldalról
             </Link>
           </li>
+          <li>
+            <Link to="/articles" className="nav-link">
+              Érdekességek
+            </Link>
+          </li>
           {loggedInUser?.userId ? (
             <li>
               <Link

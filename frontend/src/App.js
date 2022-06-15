@@ -11,6 +11,7 @@ import OneCoffeeRating from './pages/OneCoffeeRating';
 import NewProduct from './pages/NewProduct';
 import UserProfile from './pages/UserProfile';
 import About from './pages/About';
+import Articles from './pages/Articles';
 
 import './scss/App.scss';
 
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/createnewproduct" element={<NewProduct />} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/about" element={<About />} />
+        <Route path="/articles" element={<Articles />} />
       </Routes>
       <Footer />
     </>

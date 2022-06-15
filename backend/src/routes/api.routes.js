@@ -1,11 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+
 import {
-  userController,
-  loginController,
+  articleController,
   coffeeController,
-  oneCoffeeController,
+  loginController,
   newProductController,
+  oneCoffeeController,
+  userController,
 } from '../controllers';
 import authorization from '../middlewares/authorization';
 
@@ -14,15 +16,17 @@ const router = express.Router();
 router.use(cors());
 router.use(express.json());
 
-router.post('/user', userController.post);
-router.patch('/user', authorization, userController.patch);
-router.delete('/user', authorization, userController.delete);
-
-router.post('/login', loginController.post);
+router.get('/articles', articleController.get);
 
 router.get('/coffees', coffeeController.get);
 
 router.post('/createnewproduct', authorization, newProductController.post);
+
+router.post('/login', loginController.post);
+
+router.post('/user', userController.post);
+router.patch('/user', authorization, userController.patch);
+router.delete('/user', authorization, userController.delete);
 
 router.get('/coffees/:productId', oneCoffeeController.get);
 router.post('/coffees/:productId', authorization, oneCoffeeController.post);
