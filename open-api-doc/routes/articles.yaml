@@ -1,0 +1,53 @@
+components:
+  schemas:
+    ArticlesResponse:
+      type: object
+      properties:
+        articles:
+          type: Array
+          description: This is an Array that contains all the article Objects
+          items:
+            type: Object
+            properties:
+              _id:
+                type: String
+                readOnly: true
+                description: The unique id of each article
+              title:
+                type: string
+                description: The title of the article
+              content:
+                type: string
+                description: The main content of the article
+              publish_date:
+                type: Date
+                description: The publication date of the article 
+      example:
+          articles:
+              _id: 6277d24527e26d0c02a9e704
+              title: This is a brand new article!
+              content: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              publish_date: 2022-05-04T22:00:00.000Z
+
+
+tags:
+  name: Articles
+  description: Article News data managing API
+
+/articles:
+  get:
+    summary: Load articles from database
+    tags: [Articles]
+    responses:
+      200:
+        description: Articles are successfully loaded from the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticlesResponse'
+      500:
+        description: There was some error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'

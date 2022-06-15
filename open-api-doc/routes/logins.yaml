@@ -1,0 +1,53 @@
+components:
+  schemas:
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: The email of the user logging in
+        password:
+          type: string
+          description: The password of the user logging in
+      example:
+        email: johndoe@test.com
+        password: JohnsPassword
+    UserLoginResponse:
+     type: object
+     properties:
+       token:
+         type: string
+         description: JWT token with user data and status
+     example:
+       token: eyJhbGciOiJIUzI1NiIsInR5cCI6ItpXVCJ9.eyJ1c2VySWQiOiI2MmE4OHhmMWRjMDk3Y2FjOTBkMmY0YjUiLCJuYW1lIjoicCTsImVtYWlsIjoicEBlbWFpbC5odSIsImlhdCI6MTY1NTIxODg1MH0.BTHg2KnIT_jWWXNrqc3VIOdO7_ZvlnFSQGYUue0H8hM
+
+tags:
+  name: UserLogin
+  description: User login data managing API
+
+/login:
+  post:
+    summary: User loggin in
+    tags: [UserLogin]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserLogin'
+    responses:
+      200:
+        description: The login was successfull
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginResponse'
+      400:
+        description: There was an error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'

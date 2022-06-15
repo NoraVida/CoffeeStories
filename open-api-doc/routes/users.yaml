@@ -1,0 +1,66 @@
+components:
+  schemas:
+    UserUpdateProfile:
+      type: object
+      required:
+        - oldPassword
+      properties:
+        name:
+          type: string
+          description: The new name of the registered user
+        email:
+          type: string
+          description: The new email of the registered user
+        oldPassword:
+          type: string
+          description: The previous password of the registered user
+        newPassword:
+          type: string
+          description: The new password of the registered user
+      example:
+        name: John Doe
+        email: johndoe@test.com
+        oldPassword: JohnsPassword
+        newPassword: newJohnsPassword
+    UserUpdateResponse:
+     type: object
+     properties:
+       token:
+         type: string
+         description: JSON Web Token
+     example:
+       token: eyJhbGciOiJIUzI1NiIsInR5cCI6ItpXVCJ9.eyJ1c2VyTWQiOiI2MmE4OHhmMWRjMDk3Y2FjOTBkMmY0YjUiLCJuYW1lIjoicCTsImVtYWlsIjoicEBlbWFpbC5odSIsImlhdCI6MTY1NTIxODg1MH0.BTHg2KnIT_jWWXNrqc3VIOdO7_ZvlnFSQGYUue0H8hM
+       
+tags:
+  name: UserUpdateProfile
+  description: Change in user data managing API
+
+/user:
+  patch:
+    summary: Update user data
+    tags: [UserUpdateProfile]
+    parameters:
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+          description: Bearer <JSON Web Token>
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserUpdateProfile'
+    responses:
+      200:
+        description: The update was successfull
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateResponse'
+      400:
+        description: There was an error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'

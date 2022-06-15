@@ -1,0 +1,91 @@
+components:
+  schemas:
+    CreateNewProduct:
+      type: object
+      required:
+        - name
+        - brand
+        - type
+        - ingredient
+        - description
+      properties:
+        name:
+          type: string
+          description: The name of the new product
+        brand:
+          type: string
+          description: The brand of the new product
+        type:
+          type: string
+          description: The type of the new product
+        ingredient:
+          type: string
+          description: The ingredient of the new product
+        description:
+          type: string
+          description: The description of the new product
+      example:
+        name: 'kávé'
+        brand: 'kávémárka'
+        type: 'szemes'
+        ingredient: '100% arabika'
+        description: 'Új kávé'
+    CreateNewProductResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: The auto-generated id of the registration
+       email:
+         type: string
+         description: The email of the registered user
+     example:
+       id: 1
+       email: johndoe@test.com
+    Error:
+      type: object
+      properties:
+        errorcode:
+          type: integer
+          description: The code of the error message
+        errormessage:
+          type: string
+          description: Some error
+      example:
+          errorcode: 400 
+          errormessage: Name, email and password are required.
+
+tags:
+  name: CreateNewProduct
+  description: The creating new product managing API
+
+/createnewproduct:
+  post:
+    summary: Create a new product
+    tags: [CreateNewProduct]
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          description: Bearer <JSON Web Token>
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateNewProduct'
+    responses:
+      200:
+        description: The creating new product was successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewProductResponse'
+      400:
+        description: There was an error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
