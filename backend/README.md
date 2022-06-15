@@ -1,8 +1,8 @@
-# Frontend
+# Backend
 
-- Az `.env.example` fálj alapján létrehozni egy `.env` fájl és itt megadni a környezeti változót.
+- A `.env.example` fálj alapján létrehozni egy `.env` fájl és itt megadni a környezeti változókat.
 
-## App frontend-jének indításának lépései:
+## App backend-jének indításának lépései:
 - `npm install` - dependenciák telepítése
 - `npm start` - fejlesztői mód indítása
 - `npm test` - tesztek futtatása
