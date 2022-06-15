@@ -3,7 +3,7 @@ import cors from 'cors';
 
 import {
   articleController,
-  coffeeController,
+  coffeesController,
   loginController,
   newProductController,
   oneCoffeeController,
@@ -18,7 +18,7 @@ router.use(express.json());
 
 router.get('/articles', articleController.get);
 
-router.get('/coffees', coffeeController.get);
+router.get('/coffees', coffeesController.get);
 
 router.post('/createnewproduct', authorization, newProductController.post);
 

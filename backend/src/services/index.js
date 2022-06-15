@@ -1,5 +1,5 @@
 export * from './articleService';
-export * from './coffeeService';
+export * from './coffeesService';
 export * from './loginService';
 export * from './newProductService';
 export * from './oneCoffeeService';

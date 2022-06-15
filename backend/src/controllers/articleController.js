@@ -1,12 +1,12 @@
 import { articleService } from '../services';
 
 export const articleController = {
-  async get(req, res) {
+  async get(req, res, next) {
     try {
       const articles = await articleService.getArticle();
       return res.status(200).json({ articles });
     } catch (error) {
-      return res.status(error.status).json(error);
+      return next(error);
     }
   },
 };

@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 import Coffee from '../models/Coffee';
 import Scoring from '../models/Scoring';
 import Rating from '../models/Rating';
+
 import ApiError from '../error/ApiError';
+import { errorMessages } from '../error/errorMessages';
 
 export const oneCoffeeService = {
   async getOneCoffee(productId) {
@@ -20,10 +22,7 @@ export const oneCoffeeService = {
         rating,
       };
     } catch (error) {
-      throw new ApiError(
-        500,
-        'Database Error occurred while loading the Products',
-      );
+      throw new ApiError(500, errorMessages.loadingError);
     }
   },
 
@@ -93,6 +92,7 @@ export const oneCoffeeService = {
       return data;
     } catch (error) {
       await session.abortTransaction();
+      throw new ApiError(500, errorMessages.loadingError);
     } finally {
       session.endSession();
     }
@@ -140,6 +140,7 @@ export const oneCoffeeService = {
       return data;
     } catch (error) {
       await session.abortTransaction();
+      throw new ApiError(500, errorMessages.loadingError);
     } finally {
       session.endSession();
     }

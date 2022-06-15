@@ -1,4 +1,5 @@
 import Article from '../models/Article';
+
 import ApiError from '../error/ApiError';
 import { errorMessages } from '../error/errorMessages';
 
@@ -8,7 +9,7 @@ export const articleService = {
       const articles = await Article.find({});
       return articles;
     } catch (error) {
-      throw new ApiError(500, errorMessages.databaseArticle);
+      throw new ApiError(500, errorMessages.loadingError);
     }
   },
 };

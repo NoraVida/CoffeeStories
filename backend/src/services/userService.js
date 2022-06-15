@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import config from '../config';
 import User from '../models/User';
+
 import ApiError from '../error/ApiError';
 import { errorMessages } from '../error/errorMessages';
 import { validateUser } from '../validation/userValidation';
@@ -10,12 +11,13 @@ import { validateUser } from '../validation/userValidation';
 export const userService = {
   async register({ name, email, password }) {
     const { error } = validateUser({ name, email, password });
+    const errorMessageFromJoi = error.details[0].message;
 
     if (error) {
       if (!name && !email && !password) {
-        throw new ApiError(400, errorMessages.missingData);
+        throw new ApiError(400, errorMessages.emptyAllFields);
       }
-      throw new ApiError(400, error.details[0].message);
+      throw new ApiError(400, errorMessageFromJoi);
     }
 
     const emailExist = await User.findOne({ email });
@@ -46,7 +48,7 @@ export const userService = {
     currentPassword,
   }) {
     if (!newName && !newEmail && !newPassword) {
-      throw new ApiError(400, errorMessages.missingData);
+      throw new ApiError(400, errorMessages.emptyAllFields);
     }
 
     const user = await User.findById(userId);
@@ -57,7 +59,7 @@ export const userService = {
     const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
     console.log(user.password);
     if (!isPasswordValid) {
-      throw new ApiError(400, errorMessages.wrongOldPassword);
+      throw new ApiError(400, errorMessages.wrongPassword);
     }
 
     const userDataToUpdate = {
@@ -67,9 +69,10 @@ export const userService = {
     };
 
     const { error } = validateUser(userDataToUpdate);
+    const errorMessageFromJoi = error.details[0].message;
 
     if (error) {
-      throw new ApiError(400, error.details[0].message);
+      throw new ApiError(400, errorMessageFromJoi);
     }
 
     if (newEmail !== user.email) {
@@ -113,7 +116,7 @@ export const userService = {
     const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
     console.log(user.password);
     if (!isPasswordValid) {
-      throw new ApiError(400, errorMessages.wrongOldPassword);
+      throw new ApiError(400, errorMessages.wrongPassword);
     }
 
     const deletedUser = await User.deleteOne({ userId });
