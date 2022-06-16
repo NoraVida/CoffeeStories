@@ -63,8 +63,9 @@ export const oneCoffeeService = {
             },
           );
         } else {
-          searchedScoring.scores.push(ratingNumber); // eslint-disable-next-line
-          average = searchedScoring.scores.reduce((prev, current) => prev + current, 0) / searchedScoring.scores.length;
+          searchedScoring.scores.push(ratingNumber);
+          const sum = searchedScoring.scores.reduce((prev, current) => prev + current, 0);
+          average = sum / searchedScoring.scores.length;
         }
 
         const increment = 1;
@@ -110,8 +111,8 @@ export const oneCoffeeService = {
         const productScoring = await Scoring.findOne({ productId }, null, { session });
 
         productScoring.scores.splice(productScoring.scores.indexOf(userRating.ratingNumber), 1);
-        // eslint-disable-next-line
-        const average = productScoring.scores.reduce((prev, current) => prev + current, 0) / productScoring.scores.length;
+        const sum = productScoring.scores.reduce((prev, current) => prev + current, 0);
+        const average = sum / productScoring.scores.length;
 
         const decrement = -1;
         await Scoring.findOneAndUpdate(

@@ -11,7 +11,7 @@ import { validateUser } from '../validation/userValidation';
 export const userService = {
   async register({ name, email, password }) {
     const { error } = validateUser({ name, email, password });
-    const errorMessageFromJoi = error.details[0].message;
+    const errorMessageFromJoi = error?.details[0].message;
 
     if (error) {
       if (!name && !email && !password) {

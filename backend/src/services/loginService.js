@@ -11,7 +11,7 @@ import { validateLogin } from '../validation/loginValidation';
 export const loginService = {
   async authenticate({ email, password }) {
     const { error } = validateLogin({ email, password });
-    const errorMessageFromJoi = error.details[0].message;
+    const errorMessageFromJoi = error?.details[0].message;
 
     if (error) {
       if (!email && !password) {
