@@ -55,6 +55,7 @@ components:
           errorcode: 400 
           errormessage: Name, email and password are required.
 
+
 tags:
   name: CreateNewProduct
   description: The creating new product managing API
@@ -63,7 +64,7 @@ tags:
   post:
     summary: Create a new product
     tags: [CreateNewProduct]
-      parameters:
+    parameters:
       - in: header
         name: Authorization
         required: true

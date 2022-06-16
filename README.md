@@ -8,5 +8,9 @@ Ez a platform megoldást kínál arra, hogy bárki megtekintheti a legismertebb 
 
 ## Könyvtárak
 `wireframes`: Az applikáció wireframe-jei
+`backend`: Az applikáció backend kódja - Express.js
+`frontend`: Az applikáció frontend kódja - React
+`open-api-doc`: Az applikáció Open API dokumentációja
 
-## Telepítési útmutató
+## Az alkalmazás elindításának útmutatója
+- A `.env.example` fájlok alapján `.env` fájlok létrehozása `backend` és `frontend` mappákban

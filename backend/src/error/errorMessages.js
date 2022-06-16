@@ -1,16 +1,13 @@
 export const errorMessages = {
   emptyPassword: 'Password is required.',
   emptyEmail: 'Email is required.',
+
   emptyAllFields: 'Felhasználónév, email és jelszó megadása kötelező',
   emptyEmailPassword: 'Email és jelszó megadása kötelező',
   emailExist: 'Ez az email már foglalt',
   wrongEmail: 'Nem helyes az email',
   wrongPassword: 'Nem helyes a jelszó',
-  wrongData: 'Email or password is incorrect.',
-  server: 'Internal Server Error',
   noUserId: 'Nem találni a felhasználót',
-  // wrongOldPassword: 'Nem helyes a jelszó',
-  databaseArticle: 'Database Error occurred while loading the Articles',
   invalidToken: 'Érvénytelen token',
   loadingError: 'Valami hiba történt az adatok betöltésekor',
 };
