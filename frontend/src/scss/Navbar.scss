@@ -1,15 +1,10 @@
 nav {
-  // background-color: #e09738;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  // text-align: center;
   background-color: #3b2621;
-  // background-color: #C6A477;
-  // padding-left: 30px;
   padding: 10px;
   min-height: 10vh;
-  // min-height: 8vh;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.5);
 }
 
@@ -57,10 +52,6 @@ nav {
 .nav-active {
   transform: translateX(0%);
 }
-
-// @media screen and (min-width: 768px) and (max-width: 1199px) {
-  
-// }
 
 @media screen and (min-width: 1200px) {
   .nav-links {

@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import coffeeImg from '../assets/img/cup-coffee.jpg';
-// import coffeeCupIcon from '../assets/icons/coffeecup.png';
-
 import '../scss/Main.scss';
 
 export default function Main() {
@@ -12,7 +10,7 @@ export default function Main() {
       <section className="find-your-coffee">
         <div className="bg-image" />
         <h1>Találd meg a számodra legmegfelelőbb kávét</h1>
-        <button className="btn btn-primary mt-5" type="button">
+        <button className="btn btn-primary mt-5" id="main-findcoffee-btn" type="button">
           <Link className="link" to="/coffees">
             Megnézem az értékeléseket
           </Link>
@@ -26,8 +24,6 @@ export default function Main() {
             Böngészhetsz az egyes kávémárkák értékelési között
             {' '}
             és összehasonlíthatod azokat mások értékelései alapján
-            {/* Kommentek írása és olvasása
-            <img src={coffeeCupIcon} alt="coffee cup icon" className="acticle--icon" /> */}
           </article>
           <article className="article--card">
             Írhatsz saját értékeléseket az általad kiválasztott kávémárkákról
@@ -49,7 +45,7 @@ export default function Main() {
         <div>
           <h2>Szívesen elmondanád a saját kávésztoridat?</h2>
           <p>Egy gyors regisztráció után, már véleményezhetsz is</p>
-          <button className="btn btn-primary mt-5 ps-4 pe-4" type="button">
+          <button className="btn btn-primary mt-3 ps-4 pe-4" type="button">
             <Link className="link" to="/register">
               Irány a regisztráció
             </Link>
