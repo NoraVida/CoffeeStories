@@ -32,7 +32,7 @@ export default function UserRating({
           {comment}
           &quot;
         </p>
-        {user._id === loggedInUser.userId ? (
+        {user?._id === loggedInUser.userId ? (
           <button className="btn btn-primary rating-delete-btn" type="button" onClick={onClickDelete}>
             Törlés
           </button>
