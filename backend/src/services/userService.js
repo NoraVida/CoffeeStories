@@ -68,7 +68,7 @@ export const userService = {
     };
 
     const { error } = validateUser(userDataToUpdate);
-    const errorMessageFromJoi = error.details[0].message;
+    const errorMessageFromJoi = error?.details[0].message;
 
     if (error) {
       throw new ApiError(400, errorMessageFromJoi);
