@@ -48,11 +48,31 @@ Ez a platform megoldást kínál arra, hogy bárki megtekintheti a legismertebb 
 | /articles                | Cikkek megjelenítése a kávékról                                                |
 
 ## Adatbázis gyűjtemények
-- users: regisztrált felhasználók
-- coffees: értékelendő kávék
-- scoring: adott kávéhoz tartozó értékelések mennyisége, átlaga, pontjai
-- rating: adott felhasználó által írt értékelés és vélemény adott termékről
-- articles: megjeleníteni kívánt cikkekek
+- **users**: regisztrált felhasználók
+- **coffees**: értékelendő kávék
+- **scoring**: adott kávéhoz tartozó értékelések mennyisége, átlaga, pontjai
+- **rating**: adott felhasználó által írt értékelés és vélemény adott termékről
+- **articles**: megjeleníteni kívánt cikkekek
+
+## Technikai követelmények
+**Backend**
+
+- Node.js
+- Express.js
+- MongoDB
+- JSON Web Token
+- Docker
+
+**Frontend**
+
+- React
+- Bootstrap
+- Sass
+
+**API dokumentáció**
+
+- OpenAPI/Swagger
+
 
 ## Könyvtárak
 - `wireframes`: Az applikáció wireframe-jei
