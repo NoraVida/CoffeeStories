@@ -48,11 +48,11 @@ Ez a platform megoldást kínál arra, hogy bárki megtekintheti a legismertebb 
 | /articles                | Cikkek megjelenítése a kávékról                                                |
 
 ## Adatbázis gyűjtemények
-- **users**: regisztrált felhasználók
-- **coffees**: értékelendő kávék
-- **scoring**: adott kávéhoz tartozó értékelések mennyisége, átlaga, pontjai
-- **rating**: adott felhasználó által írt értékelés és vélemény adott termékről
-- **articles**: megjeleníteni kívánt cikkekek
+- _users_: regisztrált felhasználók
+- _coffees_: értékelendő kávék
+- _scoring_: adott kávéhoz tartozó értékelések mennyisége, átlaga, pontjai
+- _rating_: adott felhasználó által írt értékelés és vélemény adott termékről
+- _articles_: megjeleníteni kívánt cikkekek
 
 ## Technikai követelmények
 **Backend**
