@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import useFetch from 'use-http';
 
 import { getDataFromToken, getTokenFromLocalStorage } from '../helper/utils';
 import { useAuthContext } from '../helper/AuthContext';
 
 export default function UserProfileForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     reset,
@@ -76,14 +79,22 @@ export default function UserProfileForm() {
   }, [dirtyFields.newPassword]);
 
   const items = [];
-  if (dirtyFields?.name) items.push(`New Username: ${getValues('name')}`);
-  if (dirtyFields?.email) items.push(`New Email: ${getValues('email')}`);
-  if (dirtyFields?.newPassword) items.push('New password');
+  if (dirtyFields?.name) {
+    items.push(`New Username: ${getValues('name')}`);
+  }
+  if (dirtyFields?.email) {
+    items.push(`New Email: ${getValues('email')}`);
+  }
+  if (dirtyFields?.newPassword) {
+    items.push('New password');
+  }
 
   const deleteUserProfile = async (formData) => {
-    const result = await request.delete('/user', formData);
+    await request.post('/user/deleteprofile', formData);
     if (response.ok) {
-      console.log(result);
+      setLoggedInUser({});
+      localStorage.removeItem('coffeeStoriesToken');
+      navigate('/');
     }
   };
 

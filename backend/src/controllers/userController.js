@@ -29,11 +29,11 @@ export const userController = {
     }
   },
 
-  async delete(req, res, next) {
+  async deleteUserProfile(req, res, next) {
     try {
       const response = await userService.deleteUser({
         userId: req.header('userId'),
-        currentPassword: req.body.currentPassword,
+        currentPassword: req.body.currentPasswordDel,
       });
       return res.status(200).json(response);
     } catch (error) {

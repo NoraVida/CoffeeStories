@@ -57,7 +57,6 @@ export const userService = {
     }
 
     const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
-    console.log(user.password);
     if (!isPasswordValid) {
       throw new ApiError(400, errorMessages.wrongPassword);
     }
@@ -114,12 +113,15 @@ export const userService = {
     }
 
     const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
-    console.log(user.password);
     if (!isPasswordValid) {
       throw new ApiError(400, errorMessages.wrongPassword);
     }
 
-    const deletedUser = await User.deleteOne({ userId });
-    return deletedUser;
+    try {
+      await User.deleteOne({ _id: userId });
+      return { confirmation: 'Profile deleted' };
+    } catch (error) {
+      throw new ApiError(400, errorMessages.deletingError);
+    }
   },
 };

@@ -26,7 +26,7 @@ router.post('/login', loginController.post);
 
 router.post('/user', userController.post);
 router.patch('/user', authorization, userController.patch);
-router.delete('/user', authorization, userController.delete);
+router.post('/user/deleteprofile', authorization, userController.deleteUserProfile);
 
 router.get('/coffees/:productId', oneCoffeeController.get);
 router.post('/coffees/:productId', authorization, oneCoffeeController.post);

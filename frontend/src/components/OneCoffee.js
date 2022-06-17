@@ -1,5 +1,6 @@
 import React from 'react';
 import Rating from 'react-rating';
+
 import coffeeIconColor from '../assets/icons/coffee-cup-rating-color.png';
 import coffeeIconOpacity from '../assets/icons/coffee-cup-rating-opacity.png';
 import '../scss/Coffee.scss';
