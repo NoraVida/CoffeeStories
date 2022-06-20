@@ -25,9 +25,21 @@ components:
       example:
           articles:
               _id: 6277d24527e26d0c02a9e704
-              title: This is a brand new article!
-              content: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-              publish_date: 2022-05-04T22:00:00.000Z
+              title: Ez a legújabb kávészokás
+              content: Lorem Ipsum is text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.
+              publish_date: 2022-05-16T22:00:00.000Z
+    Error:
+      type: object
+      properties:
+        errorcode:
+          type: integer
+          description: The code of the error message
+        errormessage:
+          type: string
+          description: Some error
+      example:
+          errorcode: 400 
+          errormessage: Valami hiba történt az adatok betöltésekor
 
 
 tags:
@@ -45,8 +57,8 @@ tags:
           application/json:
             schema:
               $ref: '#/components/schemas/ArticlesResponse'
-      500:
-        description: There was some error
+      400:
+        description: There was an error
         content:
           application/json:
             schema:

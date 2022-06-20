@@ -42,18 +42,6 @@ components:
      example:
        id: 1
        email: johndoe@test.com
-    Error:
-      type: object
-      properties:
-        errorcode:
-          type: integer
-          description: The code of the error message
-        errormessage:
-          type: string
-          description: Some error
-      example:
-          errorcode: 400 
-          errormessage: Name, email and password are required.
 
 
 tags:

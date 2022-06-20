@@ -22,6 +22,26 @@ components:
         email: johndoe@test.com
         oldPassword: JohnsPassword
         newPassword: newJohnsPassword
+    UserRegistration:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          description: The name of the registered user
+        email:
+          type: string
+          description: The email of the registered user
+        password:
+          type: string
+          description: The password of the registered user
+      example:
+        name: John Doe
+        email: johndoe@test.com
+        password: JohnsPassword
     UserUpdateResponse:
      type: object
      properties:
@@ -30,7 +50,20 @@ components:
          description: JSON Web Token
      example:
        token: eyJhbGciOiJIUzI1NiIsInR5cCI6ItpXVCJ9.eyJ1c2VyTWQiOiI2MmE4OHhmMWRjMDk3Y2FjOTBkMmY0YjUiLCJuYW1lIjoicCTsImVtYWlsIjoicEBlbWFpbC5odSIsImlhdCI6MTY1NTIxODg1MH0.BTHg2KnIT_jWWXNrqc3VIOdO7_ZvlnFSQGYUue0H8hM
-       
+    UserRegistrationResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: The auto-generated id of the registration
+       email:
+         type: string
+         description: The email of the registered user
+     example:
+       id: 1
+       email: johndoe@test.com
+
+
 tags:
   name: UserUpdateProfile
   description: Change in user data managing API
@@ -58,6 +91,28 @@ tags:
           application/json:
             schema:
               $ref: '#/components/schemas/UserUpdateResponse'
+      400:
+        description: There was an error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+  post:
+    summary: Create a new registration
+    tags: [UserRegistration]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRegistration'
+    responses:
+      200:
+        description: The registration was successfully created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationResponse'
       400:
         description: There was an error
         content:
