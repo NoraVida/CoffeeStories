@@ -9,7 +9,7 @@ export const articleService = {
       const articles = await Article.find({});
       return articles;
     } catch (error) {
-      throw new ApiError(500, errorMessages.loadingError);
+      throw new ApiError(400, errorMessages.loadingError);
     }
   },
 };

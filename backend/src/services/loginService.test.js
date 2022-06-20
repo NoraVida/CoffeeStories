@@ -6,7 +6,7 @@ import app from '../app';
 // import User from '../models/User';
 import { errorMessages } from '../error/errorMessages';
 
-describe('when the email or password is missing', () => {
+describe('POST /api/login', () => {
   beforeAll(async () => {
     dotenv.config();
     await mongoose.connect(process.env.TEST_MONGO_URI);

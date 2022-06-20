@@ -4,9 +4,8 @@ import dotenv from 'dotenv';
 
 import app from '../app';
 import User from '../models/User';
-// import { errorMessages } from '../error/errorMessages';
 
-describe('POST /api/user', () => {
+describe('POST /api/user - when user wants to register', () => {
   beforeEach(async () => {
     dotenv.config();
     await mongoose.connect(process.env.TEST_MONGO_URI);
@@ -97,7 +96,7 @@ describe('POST /api/user', () => {
           return done(error);
         }
         expect(data.body.message).toEqual(
-          'Felhasználónév, email és jelszó megadása kötelező',
+          'Minden mező kitöltése kötelező',
         );
         return done();
       });

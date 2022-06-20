@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 import app from '../app';
 
-describe('GET /api/articles', () => {
+describe('GET api/coffees/:productId', () => {
   beforeAll(async () => {
     dotenv.config();
     await mongoose.connect(process.env.TEST_MONGO_URI);

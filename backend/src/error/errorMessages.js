@@ -7,4 +7,5 @@ export const errorMessages = {
   noUserId: 'Nem találni a felhasználót',
   invalidToken: 'Érvénytelen token',
   loadingError: 'Valami hiba történt az adatok betöltésekor',
+  deletingError: 'Valami hiba történt a profil törlésekor',
 };

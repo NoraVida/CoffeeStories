@@ -1,10 +1,12 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
 import app from '../app';
-import 'dotenv/config';
 
 describe('GET /api/coffees', () => {
   beforeAll(async () => {
+    dotenv.config();
     await mongoose.connect(process.env.TEST_MONGO_URI);
   });
 
