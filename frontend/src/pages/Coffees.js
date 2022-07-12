@@ -39,7 +39,7 @@ function Coffees() {
       ) : (
         <>
           <div className="coffee-container pt-3">
-            {data.coffees?.coffee.map((product) => (
+            {data.coffees?.coffee.slice(0).reverse().map((product) => (
               <Coffee
                 key={product._id}
                 productId={product._id}

@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import app from '../app';
-// import User from '../models/User';
 import { errorMessages } from '../error/errorMessages';
 
 describe('POST /api/login', () => {

@@ -69,16 +69,10 @@ Ez a platform megoldást kínál arra, hogy bárki megtekintheti a legismertebb 
 - Bootstrap
 - Sass
 
-**API dokumentáció**
-
-- OpenAPI/Swagger
-
-
 ## Könyvtárak
 - `wireframes`: Az applikáció wireframe-jei
 - `backend`: Az applikáció backend kódja - Express.js
 - `frontend`: Az applikáció frontend kódja - React
-- `open-api-doc`: Az applikáció Open API dokumentációja
 
 ## Az alkalmazás elindításának útmutatója
 - A `.env.example` fájlok alapján `.env` fájlok létrehozása `backend` és `frontend` mappákban
@@ -86,4 +80,3 @@ Ez a platform megoldást kínál arra, hogy bárki megtekintheti a legismertebb 
 - `docker-compose --env-file ./.env up` - parancs után az applikáció elindul az következő címeken: 
   - KávéSztorik frontend: http://localhost:3000/
   - KávéSztorik backend: http://localhost:8080/
-  - KávéSztorik Swagger Open API documentáció http://localhost:4000/api-docs/#/

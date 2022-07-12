@@ -6,13 +6,6 @@ services:
     - '27037:27017'
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
-  open-api-doc:
-    build: open-api-doc
-    ports:
-      - '4000:4000'
-    volumes:
-      - /app/node_modules
-      - ./open-api-doc:/app
   frontend:
     build: frontend
     environment:

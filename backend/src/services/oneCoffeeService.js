@@ -84,7 +84,16 @@ export const oneCoffeeService = {
         );
 
         data.coffee = await Coffee.findOne({ _id: productId }, null, { session });
-        data.scoring = await Scoring.findOne({ productId }, null, { session });
+        if (!searchedScoring) {
+          data.scoring = {
+            productId,
+            scores: [ratingNumber],
+            average: ratingNumber,
+            ratingNumber: 1,
+          };
+        } else {
+          data.scoring = await Scoring.findOne({ productId }, null, { session });
+        }
         data.rating = await Rating.find({ productId }, null, { session }).populate('user');
       });
 
@@ -112,7 +121,12 @@ export const oneCoffeeService = {
 
         productScoring.scores.splice(productScoring.scores.indexOf(userRating.ratingNumber), 1);
         const sum = productScoring.scores.reduce((prev, current) => prev + current, 0);
-        const average = sum / productScoring.scores.length;
+        let average;
+        if (productScoring.scores.length === 0) {
+          average = 0;
+        } else {
+          average = sum / productScoring.scores.length;
+        }
 
         const decrement = -1;
         await Scoring.findOneAndUpdate(

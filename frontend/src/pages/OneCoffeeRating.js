@@ -174,7 +174,7 @@ export default function OneCoffeeRating() {
             </div>
           ) : (
             <div className="pb-5">
-              {ratings?.map((oneRating) => (
+              {ratings?.slice(0).reverse().map((oneRating) => (
                 <UserRating
                   key={oneRating._id}
                   user={oneRating.user}
